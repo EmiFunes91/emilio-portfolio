@@ -19,7 +19,7 @@ export default function ContactForm({ language }: { language: "es" | "en" }) {
   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
-  const recaptchaKey = "6Lc1XRorAAAAAG2I4WvcK5zbK0W5AjDkVGlwD4Sn";
+  const recaptchaKey = "6Lc9cR0rAAAAAHcHg_aUYz09Wyf65eg_PgHWq-Zm";
 
   const t = {
     es: {
