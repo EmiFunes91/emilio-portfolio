@@ -27,7 +27,7 @@ export default function Hero({
   return (
     <section
       id="inicio"
-      className="scroll-mt-24 text-center pt-16 md:pt-24 px-4"
+      className="scroll-mt-24 text-center pt-24 md:pt-36 px-4"
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
