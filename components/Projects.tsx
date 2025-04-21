@@ -55,7 +55,7 @@ const projects: Project[] = [
     technologies: [
       <FaJava title="Java" key="java" />,
       <SiSpring title="Spring Boot" key="spring" />,
-      <SiMysql title="MySQL" key="mysql" />,
+      <SiPostgresql title="PostgreSQL" key="postgres" />,,
       <SiThymeleaf title="Thymeleaf" key="thymeleaf" />,
     ],
     codeLink: 'https://github.com/EmiFunes91/store',
