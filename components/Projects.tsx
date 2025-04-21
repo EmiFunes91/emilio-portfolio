@@ -59,6 +59,8 @@ const projects: Project[] = [
       <SiThymeleaf title="Thymeleaf" key="thymeleaf" />,
     ],
     codeLink: 'https://github.com/EmiFunes91/store',
+    image: '/images/imgAPIproduct.png',
+    video: '/video/',
   },
   {
     title: 'QuickTasks (App de Tareas)',
