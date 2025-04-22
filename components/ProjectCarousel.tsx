@@ -16,8 +16,7 @@ export default function ProjectCarousel({
   const [modalImg, setModalImg] = useState<string | null>(null);
 
   const next = () => setCurrent((prev) => (prev + 1) % images.length);
-  const prev = () =>
-    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -30,22 +29,22 @@ export default function ProjectCarousel({
   return (
     <>
       <div className="relative overflow-hidden rounded-lg mb-4 group">
-        {/* Carrusel */}
-        <div className="relative w-full aspect-video overflow-hidden rounded-lg">
+        <div className="relative w-full overflow-hidden rounded-lg">
           <motion.div
             key={images[current]}
             initial={{ opacity: 0.4, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="relative w-full h-full"
+            className="w-full h-full"
           >
             <Image
               src={images[current]}
               alt={`Imagen ${current + 1} de ${title}`}
               width={800}
               height={450}
-              className="rounded-lg w-full h-auto object-cover"
+              className="object-cover w-full h-auto rounded-lg cursor-pointer"
               onClick={() => setModalImg(images[current])}
+              priority
             />
           </motion.div>
 
@@ -122,3 +121,4 @@ export default function ProjectCarousel({
     </>
   );
 }
+
