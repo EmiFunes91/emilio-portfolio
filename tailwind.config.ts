@@ -1,17 +1,15 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     container: {
       center: true,
       padding: "1rem",
       screens: {
-        sm: "600px",
+        xs: "480px",
+        sm: "640px",
         md: "768px",
         lg: "1024px",
         xl: "1280px",
@@ -21,12 +19,12 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#2563eb", // azul moderno
+          DEFAULT: "#2563eb",
           dark: "#1e40af",
           light: "#3b82f6",
         },
         secondary: {
-          DEFAULT: "#64748b", // slate moderno
+          DEFAULT: "#64748b",
         },
       },
       fontFamily: {

@@ -104,15 +104,15 @@ export default function HomePage() {
         </FadeInSection>
 
         <FadeInSection>
-          <Stack title={tLang.tech} />
+          <Stack title={tLang.tech} language={language} />
         </FadeInSection>
 
         <FadeInSection>
-          <Projects title={tLang.projects} />
+          <Projects title={tLang.projects} language={language} />
         </FadeInSection>
 
         <FadeInSection>
-          <Testimonials title={tLang.testimonials} />
+          <Testimonials title={tLang.testimonials} language={language} />
         </FadeInSection>
 
         <FadeInSection>

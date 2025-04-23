@@ -2,14 +2,7 @@
 
 import Link from 'next/link'
 import {
-  Menu,
-  X,
-  Home,
-  User,
-  Layers,
-  Folder,
-  MessageCircle,
-  Send
+  Menu, X, Home, User, Layers, Folder, MessageCircle, Send
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import DarkModeToggle from './DarkModeToggle'
@@ -19,10 +12,7 @@ import { useSmoothScroll } from '../../hooks/useSmoothScroll'
 import { motion } from 'framer-motion'
 
 export default function Navbar({
-  darkMode,
-  setDarkMode,
-  language,
-  setLanguage
+  darkMode, setDarkMode, language, setLanguage
 }: {
   darkMode: boolean
   setDarkMode: (val: boolean) => void
@@ -61,23 +51,15 @@ export default function Navbar({
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-xl font-bold flex items-center gap-2 text-blue-600 dark:text-blue-400"
-        >
+        <Link href="/" className="text-xl font-bold flex items-center gap-2 text-blue-600 dark:text-blue-400">
           <FaCode className="w-5 h-5" />
           <span className="tracking-wider">Portfolio</span>
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition flex items-center gap-2"
-            >
+            <a key={link.href} href={link.href}
+              className="text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition flex items-center gap-2">
               {link.icon}
               <span>{link.label}</span>
             </a>
@@ -86,37 +68,20 @@ export default function Navbar({
           <LanguageToggle language={language} setLanguage={setLanguage} />
         </div>
 
-        {/* Mobile nav toggle */}
         <div className="md:hidden flex items-center gap-2">
-          <DarkModeToggle
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-            aria-label="Toggle dark mode"
-          />
-          <LanguageToggle
-            language={language}
-            setLanguage={setLanguage}
-            aria-label="Cambiar idioma"
-          />
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          >
+          <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+          <LanguageToggle language={language} setLanguage={setLanguage} />
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             {menuOpen ? <X /> : <Menu />}
           </button>
         </div>
       </div>
 
-      {/* Mobile nav menu */}
       {menuOpen && (
         <div className="md:hidden px-6 pb-4 space-y-2">
           {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="block text-sm text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition flex items-center gap-2"
-            >
+            <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}
+              className="block text-sm text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition flex items-center gap-2">
               {link.icon}
               <span>{link.label}</span>
             </a>

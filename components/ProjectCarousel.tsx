@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProjectCarousel({
@@ -16,7 +16,8 @@ export default function ProjectCarousel({
   const [modalImg, setModalImg] = useState<string | null>(null);
 
   const next = () => setCurrent((prev) => (prev + 1) % images.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  const prev = () =>
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -28,34 +29,37 @@ export default function ProjectCarousel({
 
   return (
     <>
-      <div className="relative overflow-hidden rounded-lg mb-4 group">
-        <div className="relative w-full overflow-hidden rounded-lg">
+      <div className="relative overflow-hidden rounded-xl mb-4 group bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div
+          className="relative w-full overflow-hidden rounded-xl"
+          style={{ aspectRatio: "16 / 9", height: "auto" }}
+        >
           <motion.div
             key={images[current]}
             initial={{ opacity: 0.4, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="w-full h-full"
+            className="relative w-full h-full" // ✅ esto es CLAVE para fill
           >
             <Image
               src={images[current]}
               alt={`Imagen ${current + 1} de ${title}`}
-              width={800}
-              height={450}
-              className="object-cover w-full h-auto rounded-lg cursor-pointer"
+              fill
+              className="object-cover object-top rounded-xl cursor-pointer"
               onClick={() => setModalImg(images[current])}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
               priority
             />
           </motion.div>
 
-          {/* Dots finos y centrados */}
+          {/* Dots finos */}
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 hidden sm:flex gap-1.5 z-10">
             {images.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
                 aria-label={`Ir a la imagen ${i + 1}`}
-                className={`h-[2px] w-5 transition-all rounded-full ${
+                className={`h-[2px] w-5 rounded-full transition-all ${
                   i === current
                     ? "bg-blue-500 dark:bg-blue-400"
                     : "bg-gray-400/50 dark:bg-gray-600/40"
@@ -90,7 +94,7 @@ export default function ProjectCarousel({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur"
             role="dialog"
             aria-modal="true"
           >
@@ -105,14 +109,14 @@ export default function ProjectCarousel({
                 aria-label="Cerrar imagen"
                 className="absolute top-2 right-3 p-[6px] text-white bg-gray-800/80 hover:bg-red-500 transition text-xs w-7 h-7 rounded-full flex items-center justify-center"
               >
-                ✕
+                <X className="w-5 h-5" />
               </button>
               <Image
                 src={modalImg}
                 alt="Vista ampliada"
                 width={1280}
                 height={720}
-                className="rounded-lg object-contain w-full max-h-[80vh]"
+                className="rounded-xl object-contain w-full max-h-[80vh]"
               />
             </motion.div>
           </motion.div>
@@ -121,4 +125,3 @@ export default function ProjectCarousel({
     </>
   );
 }
-
