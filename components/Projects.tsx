@@ -94,7 +94,7 @@ const projects: Project[] = [
       "/projects/store-api/2.png",
       "/projects/store-api/3.png",
     ],
-    video: "/video/demoStore.mp4",
+    video: "/video/",
   },
   {
     content: {
