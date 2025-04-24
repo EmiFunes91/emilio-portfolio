@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ export default function ContactForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [showRecaptcha, setShowRecaptcha] = useState(false); // 👈 nuevo estado
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
 
   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
@@ -59,7 +59,7 @@ export default function ContactForm() {
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowRecaptcha(true), 1500); // 👈 renderiza con delay
+    const timer = setTimeout(() => setShowRecaptcha(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -138,7 +138,7 @@ export default function ContactForm() {
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderName}
-          className="w-full px-4 py-3 rounded-xl text-base transition-colors duration-300 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl text-base bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
       </div>
 
@@ -151,7 +151,7 @@ export default function ContactForm() {
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderEmail}
-          className="w-full px-4 py-3 rounded-xl text-base transition-colors duration-300 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl text-base bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
       </div>
 
@@ -164,14 +164,16 @@ export default function ContactForm() {
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderMessage}
-          className="w-full px-4 py-3 rounded-xl text-base transition-colors duration-300 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl text-base bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className={`btn btn-md btn-primary rounded-xl ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+        className={`btn btn-md btn-primary rounded-xl ${
+          loading ? "opacity-70 cursor-not-allowed" : ""
+        }`}
       >
         {loading ? (
           <span className="animate-spin h-5 w-5 border-t-2 border-white rounded-full" />
@@ -181,8 +183,11 @@ export default function ContactForm() {
       </button>
 
       {showRecaptcha && (
-        <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />
+        <div style={{ display: "none" }}>
+          <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />
+        </div>
       )}
     </motion.form>
   );
 }
+
