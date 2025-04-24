@@ -81,14 +81,14 @@ export default function ContactForm() {
     try {
       setLoading(true);
       setError("");
-      const token = await recaptchaRef.current?.executeAsync();
-      recaptchaRef.current?.reset();
+      // const token = await recaptchaRef.current?.executeAsync();
+      // recaptchaRef.current?.reset();
 
-      if (!token) {
-        setError(tLang.errorCaptcha);
-        setLoading(false);
-        return;
-      }
+      //  if (!token) {
+      //    setError(tLang.errorCaptcha);
+      //   setLoading(false);
+      //   return;
+      //  }
 
       const result = await emailjs.send(
         serviceId,
@@ -97,7 +97,7 @@ export default function ContactForm() {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          "g-recaptcha-response": token,
+          //"g-recaptcha-response": token,
         },
         publicKey
       );
@@ -185,7 +185,7 @@ export default function ContactForm() {
         )}
       </button>
 
-      <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />
+      {/*<ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />*/}
     </motion.form>
   );
 }
