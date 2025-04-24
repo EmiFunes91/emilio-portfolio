@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from "@emailjs/browser";
@@ -8,15 +8,12 @@ import { usePreferences } from "../context/PreferencesContext";
 
 export default function ContactForm() {
   const { language } = usePreferences();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [showRecaptcha, setShowRecaptcha] = useState(false); // 👈 nuevo estado
 
   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
@@ -61,6 +58,11 @@ export default function ContactForm() {
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setShowRecaptcha(true), 1500); // 👈 renderiza con delay
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -81,14 +83,15 @@ export default function ContactForm() {
     try {
       setLoading(true);
       setError("");
-      // const token = await recaptchaRef.current?.executeAsync();
-      // recaptchaRef.current?.reset();
 
-      //  if (!token) {
-      //    setError(tLang.errorCaptcha);
-      //   setLoading(false);
-      //   return;
-      //  }
+      const token = await recaptchaRef.current?.executeAsync();
+      recaptchaRef.current?.reset();
+
+      if (!token) {
+        setError(tLang.errorCaptcha);
+        setLoading(false);
+        return;
+      }
 
       const result = await emailjs.send(
         serviceId,
@@ -97,7 +100,7 @@ export default function ContactForm() {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          //"g-recaptcha-response": token,
+          "g-recaptcha-response": token,
         },
         publicKey
       );
@@ -127,9 +130,7 @@ export default function ContactForm() {
       {submitted && <p className="text-green-500 text-sm">{tLang.success}</p>}
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-1">
-          {tLang.name}
-        </label>
+        <label htmlFor="name" className="block text-sm font-medium mb-1">{tLang.name}</label>
         <input
           type="text"
           name="name"
@@ -142,9 +143,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-1">
-          {tLang.email}
-        </label>
+        <label htmlFor="email" className="block text-sm font-medium mb-1">{tLang.email}</label>
         <input
           type="email"
           name="email"
@@ -157,9 +156,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-1">
-          {tLang.message}
-        </label>
+        <label htmlFor="message" className="block text-sm font-medium mb-1">{tLang.message}</label>
         <textarea
           name="message"
           rows={4}
@@ -174,9 +171,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className={`btn btn-md btn-primary rounded-xl ${
-          loading ? "opacity-70 cursor-not-allowed" : ""
-        }`}
+        className={`btn btn-md btn-primary rounded-xl ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
       >
         {loading ? (
           <span className="animate-spin h-5 w-5 border-t-2 border-white rounded-full" />
@@ -185,7 +180,9 @@ export default function ContactForm() {
         )}
       </button>
 
-      {/*<ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />*/}
+      {showRecaptcha && (
+        <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />
+      )}
     </motion.form>
   );
 }
