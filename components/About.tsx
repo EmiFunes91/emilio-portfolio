@@ -1,8 +1,14 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-export default function About({ title, text }: { title: string; text: string }) {
+export default function About({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) {
   return (
     <section
       id="sobre-mi"
@@ -13,7 +19,7 @@ export default function About({ title, text }: { title: string; text: string }) 
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-blue-600 dark:text-blue-400"
+        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white"
       >
         {title}
       </motion.h2>

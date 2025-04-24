@@ -22,38 +22,14 @@ export default function Stack() {
   };
 
   const technologies = [
-    {
-      icon: <FaJava className="w-8 h-8 text-blue-700 dark:text-blue-400" />,
-      label: "Java / Spring Boot",
-    },
-    {
-      icon: <FaLaravel className="w-8 h-8 text-red-600" />,
-      label: "PHP / Laravel",
-    },
-    {
-      icon: <Database className="w-8 h-8 text-purple-500" />,
-      label: "PostgreSQL / MySQL",
-    },
-    {
-      icon: <Code2 className="w-8 h-8 text-green-500" />,
-      label: "REST APIs / JWT",
-    },
-    {
-      icon: <FaDocker className="w-8 h-8 text-blue-500" />,
-      label: "Docker / Git",
-    },
-    {
-      icon: <TerminalSquare className="w-8 h-8 text-yellow-500" />,
-      label: "CI/CD",
-    },
-    {
-      icon: <FaReact className="w-8 h-8 text-sky-500" />,
-      label: "React / Next.js",
-    },
-    {
-      icon: <Server className="w-8 h-8 text-indigo-500" />,
-      label: "Tailwind / Bootstrap",
-    },
+    { icon: <FaJava className="w-8 h-8 text-blue-700 dark:text-blue-400" />, label: "Java / Spring Boot" },
+    { icon: <FaLaravel className="w-8 h-8 text-red-600" />, label: "PHP / Laravel" },
+    { icon: <Database className="w-8 h-8 text-purple-500" />, label: "PostgreSQL / MySQL" },
+    { icon: <Code2 className="w-8 h-8 text-green-500" />, label: "REST APIs / JWT" },
+    { icon: <FaDocker className="w-8 h-8 text-blue-500" />, label: "Docker / Git" },
+    { icon: <TerminalSquare className="w-8 h-8 text-yellow-500" />, label: "CI/CD" },
+    { icon: <FaReact className="w-8 h-8 text-sky-500" />, label: "React / Next.js" },
+    { icon: <Server className="w-8 h-8 text-indigo-500" />, label: "Tailwind / Bootstrap" },
   ];
 
   const { title, subtitle } = t[language];
@@ -65,7 +41,7 @@ export default function Stack() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-blue-600 dark:text-blue-400 text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white text-center"
       >
         {title}
       </motion.h2>
@@ -93,7 +69,7 @@ export default function Stack() {
             className="flex flex-col items-center justify-center gap-2 p-3 hover:scale-105 transition-transform duration-300"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="w-9 h-9">{tech.icon}</div>
+            <div className="w-9 h-9 flex items-center justify-center">{tech.icon}</div>
             <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
               {tech.label}
             </span>
@@ -103,3 +79,4 @@ export default function Stack() {
     </section>
   );
 }
+

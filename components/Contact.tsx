@@ -21,23 +21,24 @@ export default function Contact() {
     },
   };
 
-  const { title, description, buttonText } = t[language];
+  const { title, description } = t[language];
 
   return (
     <section className="mt-24 px-4" id="contacto">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-blue-600 dark:text-blue-400 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white">
           {title}
         </h2>
 
-        <p className="text-gray-600 dark:text-gray-300 text-lg sm:text-xl max-w-xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed">
           {description}
         </p>
       </div>
 
-      <div className="max-w-xl mx-auto mt-8">
+      <div className="max-w-xl mx-auto mt-10">
         <ContactForm />
       </div>
     </section>
   );
 }
+

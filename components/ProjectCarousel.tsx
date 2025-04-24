@@ -16,8 +16,7 @@ export default function ProjectCarousel({
   const [modalImg, setModalImg] = useState<string | null>(null);
 
   const next = () => setCurrent((prev) => (prev + 1) % images.length);
-  const prev = () =>
-    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -38,11 +37,11 @@ export default function ProjectCarousel({
           initial={{ opacity: 0.4, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4 }}
-          className="relative w-full h-full" // ✅ esto es CLAVE para fill
+          className="relative w-full h-full"
         >
           <Image
             src={images[current]}
-            alt={`Imagen ${current + 1} de ${title}`}
+            alt={`${title} - Imagen ${current + 1}`}
             fill
             className="object-cover object-top rounded-xl cursor-pointer"
             onClick={() => setModalImg(images[current])}
@@ -51,14 +50,14 @@ export default function ProjectCarousel({
           />
         </motion.div>
 
-        {/* Dots finos */}
+        {/* Dots de navegación */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {images.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Ir a la imagen ${i + 1}`}
-              className={`h-1.5 w-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              className={`h-1.5 w-5 rounded-full transition-all ${
                 i === current
                   ? "bg-blue-500 dark:bg-blue-400"
                   : "bg-gray-400/50 dark:bg-gray-600/40"
@@ -67,24 +66,24 @@ export default function ProjectCarousel({
           ))}
         </div>
 
-        {/* Flechas visiblemente accesibles */}
+        {/* Botones de navegación */}
         <button
           onClick={prev}
-          className="absolute top-1/2 left-3 -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition flex sm:group-hover:flex"
+          className="absolute top-1/2 left-3 -translate-y-1/2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition"
           aria-label="Anterior"
         >
           <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-white" />
         </button>
         <button
           onClick={next}
-          className="absolute top-1/2 right-3 -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition flex sm:group-hover:flex"
+          className="absolute top-1/2 right-3 -translate-y-1/2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition"
           aria-label="Siguiente"
         >
           <ChevronRight className="w-5 h-5 text-gray-700 dark:text-white" />
         </button>
       </div>
 
-      {/* Modal fullscreen */}
+      {/* Modal de imagen ampliada */}
       <AnimatePresence>
         {modalImg && (
           <motion.div
@@ -95,12 +94,14 @@ export default function ProjectCarousel({
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur"
             role="dialog"
             aria-modal="true"
+            onClick={() => setModalImg(null)} // ✅ cerrar al tocar el fondo
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               className="relative w-full max-w-4xl p-4"
+              onClick={(e) => e.stopPropagation()} // 🛑 evita cerrar al tocar el modal
             >
               <button
                 onClick={() => setModalImg(null)}
@@ -123,3 +124,4 @@ export default function ProjectCarousel({
     </div>
   );
 }
+

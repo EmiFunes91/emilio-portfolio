@@ -33,7 +33,7 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-20 p-4 md:p-10 font-sans transition-all duration-500 bg-white text-gray-900 dark:bg-gray-950 dark:text-white">
+      <main className="min-h-screen pt-20 px-4 sm:px-6 md:px-10 font-sans bg-white text-gray-900 dark:bg-gray-950 dark:text-white transition-colors duration-300">
         <FadeInSection>
           <Hero />
         </FadeInSection>

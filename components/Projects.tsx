@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { usePreferences } from "../context/PreferencesContext";
-import { FaJava, FaLock, FaGithub } from "react-icons/fa";
+import { FaGithub, FaLock } from "react-icons/fa";
 import {
   SiSpring,
   SiPostgresql,
@@ -36,13 +36,12 @@ const projects = [
       },
     },
     technologies: [
-      <FaJava key="java" />,
+      <FaLock key="jwt" />,
       <SiSpring key="spring" />,
       <SiPostgresql key="pg" />,
       <SiThymeleaf key="thymeleaf" />,
       <SiBootstrap key="bootstrap" />,
       <SiDocker key="docker" />,
-      <FaLock key="jwt" />,
     ],
     codeLink: "https://github.com/EmiFunes91/adm-empleados",
     images: [
@@ -68,7 +67,6 @@ const projects = [
       },
     },
     technologies: [
-      <FaJava key="java" />,
       <SiSpring key="spring" />,
       <SiPostgresql key="pg" />,
       <SiThymeleaf key="thymeleaf" />,
@@ -165,7 +163,8 @@ export default function Projects() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-12 text-blue-600 dark:text-blue-400 text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-12 text-gray-900 dark:text-white text-center"
+
       >
         {tLang.title}
       </motion.h2>
@@ -184,21 +183,18 @@ export default function Projects() {
               className="flex flex-col justify-between h-full rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl bg-white dark:bg-gray-900 p-6 transition-all"
             >
               <div>
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white leading-snug">
                     {content.title}
                   </h3>
                   {content.badge && (
-                    <span className="text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 font-medium">
+                    <span className="text-[10px] sm:text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 font-medium whitespace-nowrap">
                       {content.badge}
                     </span>
                   )}
                 </div>
 
-                <ProjectCarousel
-                  images={project.images}
-                  title={content.title}
-                />
+                <ProjectCarousel images={project.images} title={content.title} />
 
                 <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
                   {content.description}
@@ -206,10 +202,7 @@ export default function Projects() {
 
                 <div className="flex flex-wrap gap-3 text-xl text-blue-500 dark:text-blue-400 mt-4">
                   {project.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="hover:scale-110 transition-transform"
-                    >
+                    <span key={i} className="hover:scale-110 transition-transform">
                       {tech}
                     </span>
                   ))}
@@ -291,3 +284,5 @@ export default function Projects() {
     </section>
   );
 }
+
+

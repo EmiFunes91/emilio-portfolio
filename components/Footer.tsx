@@ -22,22 +22,22 @@ export default function Footer() {
   const tLang = t[language];
 
   return (
-    <footer className="mt-24 py-8 border-t border-gray-200 dark:border-gray-700 text-center text-gray-600 dark:text-gray-400 transition-colors duration-300">
-      <div className="flex flex-col items-center gap-2">
+    <footer className="mt-24 py-8 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+      <div className="flex flex-col items-center gap-3">
         <p className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
           {tLang.rights}
         </p>
         <p className="text-xs sm:text-sm">{tLang.built}</p>
 
-        <div className="flex items-center gap-5 mt-3">
+        <div className="flex items-center gap-5 mt-2">
           <a
             href="https://github.com/EmiFunes91/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            className="hover:text-black dark:hover:text-white transition"
           >
-            <FaGithub className="w-6 h-6" />
+            <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
           </a>
           <a
             href="https://www.linkedin.com/in/emilio-funes-8b140b21a/"
@@ -46,7 +46,7 @@ export default function Footer() {
             aria-label="LinkedIn"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            <FaLinkedin className="w-6 h-6" />
+            <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
           </a>
         </div>
       </div>

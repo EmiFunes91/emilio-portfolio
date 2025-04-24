@@ -31,27 +31,21 @@ export default function Hero() {
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
   return (
-    <section
-      id="inicio"
-      className="scroll-mt-24 text-center pt-24 md:pt-36 px-4"
-    >
+    <section id="inicio" className="scroll-mt-24 text-center pt-24 md:pt-36 px-4">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="max-w-3xl mx-auto space-y-8"
       >
-        {/* Nombre */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400">
           {name}
         </h1>
 
-        {/* Rol */}
         <p className="text-lg sm:text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300">
           {role}
         </p>
 
-        {/* Botones */}
         <div className="flex justify-center flex-wrap gap-4 pt-2">
           <a
             href="mailto:emilio.ifunes@hotmail.es"
@@ -65,22 +59,15 @@ export default function Hero() {
             href={cvLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 rounded-xl px-5 py-2 bg-gray-800 text-white hover:bg-gray-700 shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="group inline-flex items-center gap-2 rounded-xl px-5 py-2 bg-gray-800 text-white hover:bg-gray-700 shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             <FileText className="w-4 h-4" />
             <span className="text-sm font-medium">{cvLabel}</span>
-            <Image
-              src={flagSrc}
-              alt={alt}
-              width={20}
-              height={20}
-              className="ml-1"
-            />
+            <Image src={flagSrc} alt={alt} width={20} height={20} />
           </a>
         </div>
 
-        {/* Íconos sociales */}
-        <div className="flex justify-center space-x-6 pt-4 text-gray-600 dark:text-gray-300">
+        <div className="flex justify-center gap-6 pt-4 text-gray-600 dark:text-gray-300">
           <a
             href="https://github.com/EmiFunes91"
             target="_blank"
@@ -102,3 +89,4 @@ export default function Hero() {
     </section>
   );
 }
+
