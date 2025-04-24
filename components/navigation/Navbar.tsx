@@ -9,21 +9,30 @@ import { FaCode } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import DarkModeToggle from './DarkModeToggle';
 import LanguageToggle from './LanguageToggle';
-import { useSmoothScroll } from '../../hooks/useSmoothScroll';
 import { usePreferences } from '../../context/PreferencesContext';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { language } = usePreferences();
-  useSmoothScroll();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    handleScroll(); // Aplica el estado inicial correctamente
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const section = document.querySelector(targetId);
+    if (section) {
+      const yOffset = -80; // Ajuste para navbar fijo
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setMenuOpen(false);
+    }
+  };
 
   const navLinks = [
     { label: language === 'es' ? 'Inicio' : 'Home', href: '#inicio', icon: <Home className="w-4 h-4" /> },
@@ -51,12 +60,12 @@ export default function Navbar() {
           <span className="tracking-wider">Portfolio</span>
         </Link>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8 min-w-0">
           {navLinks.map(link => (
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleLinkClick(e, link.href)}
               className="text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition flex items-center gap-2"
             >
               {link.icon}
@@ -67,7 +76,6 @@ export default function Navbar() {
           <LanguageToggle />
         </div>
 
-        {/* Mobile */}
         <div className="md:hidden flex items-center gap-2">
           <DarkModeToggle />
           <LanguageToggle />
@@ -83,7 +91,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleLinkClick(e, link.href)}
               className="block text-sm text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition flex items-center gap-2"
             >
               {link.icon}
@@ -95,4 +103,5 @@ export default function Navbar() {
     </motion.nav>
   );
 }
+
 
