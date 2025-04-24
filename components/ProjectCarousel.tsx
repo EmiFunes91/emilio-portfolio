@@ -28,58 +28,56 @@ export default function ProjectCarousel({
   }, []);
 
   return (
-    <>
-      <div className="relative overflow-hidden rounded-xl mb-4 group bg-white dark:bg-gray-900 transition-colors duration-300">
-        <div
-          className="relative w-full overflow-hidden rounded-xl"
-          style={{ aspectRatio: "16 / 9", height: "auto" }}
+    <div className="relative overflow-hidden rounded-xl mb-4 group bg-white dark:bg-gray-900 transition-colors duration-300">
+      <div
+        className="relative w-full overflow-hidden rounded-xl"
+        style={{ aspectRatio: "16 / 9", height: "auto" }}
+      >
+        <motion.div
+          key={images[current]}
+          initial={{ opacity: 0.4, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="relative w-full h-full" // ✅ esto es CLAVE para fill
         >
-          <motion.div
-            key={images[current]}
-            initial={{ opacity: 0.4, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4 }}
-            className="relative w-full h-full" // ✅ esto es CLAVE para fill
-          >
-            <Image
-              src={images[current]}
-              alt={`Imagen ${current + 1} de ${title}`}
-              fill
-              className="object-cover object-top rounded-xl cursor-pointer"
-              onClick={() => setModalImg(images[current])}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-              priority
-            />
-          </motion.div>
+          <Image
+            src={images[current]}
+            alt={`Imagen ${current + 1} de ${title}`}
+            fill
+            className="object-cover object-top rounded-xl cursor-pointer"
+            onClick={() => setModalImg(images[current])}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            priority
+          />
+        </motion.div>
 
-          {/* Dots finos */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 hidden sm:flex gap-1.5 z-10">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Ir a la imagen ${i + 1}`}
-                className={`h-[2px] w-5 rounded-full transition-all ${
-                  i === current
-                    ? "bg-blue-500 dark:bg-blue-400"
-                    : "bg-gray-400/50 dark:bg-gray-600/40"
-                }`}
-              />
-            ))}
-          </div>
+        {/* Dots finos */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Ir a la imagen ${i + 1}`}
+              className={`h-1.5 w-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                i === current
+                  ? "bg-blue-500 dark:bg-blue-400"
+                  : "bg-gray-400/50 dark:bg-gray-600/40"
+              }`}
+            />
+          ))}
         </div>
 
-        {/* Flechas */}
+        {/* Flechas visiblemente accesibles */}
         <button
           onClick={prev}
-          className="absolute top-1/2 left-3 -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition hidden group-hover:flex"
+          className="absolute top-1/2 left-3 -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition flex sm:group-hover:flex"
           aria-label="Anterior"
         >
           <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-white" />
         </button>
         <button
           onClick={next}
-          className="absolute top-1/2 right-3 -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition hidden group-hover:flex"
+          className="absolute top-1/2 right-3 -translate-y-1/2 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full shadow hover:bg-white dark:hover:bg-gray-700 transition flex sm:group-hover:flex"
           aria-label="Siguiente"
         >
           <ChevronRight className="w-5 h-5 text-gray-700 dark:text-white" />
@@ -122,6 +120,6 @@ export default function ProjectCarousel({
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

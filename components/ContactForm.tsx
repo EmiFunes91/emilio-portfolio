@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from "@emailjs/browser";
+import { usePreferences } from "../context/PreferencesContext";
 
-export default function ContactForm({ language }: { language: "es" | "en" }) {
+export default function ContactForm() {
+  const { language } = usePreferences();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -106,7 +108,7 @@ export default function ContactForm({ language }: { language: "es" | "en" }) {
       } else {
         setError(tLang.errorSend);
       }
-    } catch (err) {
+    } catch {
       setError(tLang.errorNetwork);
     } finally {
       setLoading(false);
@@ -129,14 +131,13 @@ export default function ContactForm({ language }: { language: "es" | "en" }) {
           {tLang.name}
         </label>
         <input
-          aria-label="Name"
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderName}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          className="w-full px-4 py-3 rounded-xl text-base transition-colors duration-300 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
       </div>
 
@@ -145,14 +146,13 @@ export default function ContactForm({ language }: { language: "es" | "en" }) {
           {tLang.email}
         </label>
         <input
-          aria-label="Email"
           type="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderEmail}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          className="w-full px-4 py-3 rounded-xl text-base transition-colors duration-300 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
       </div>
 
@@ -161,37 +161,31 @@ export default function ContactForm({ language }: { language: "es" | "en" }) {
           {tLang.message}
         </label>
         <textarea
-          aria-label="Message"
           name="message"
           rows={4}
           value={formData.message}
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderMessage}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          className="w-full px-4 py-3 rounded-xl text-base transition-colors duration-300 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className={`bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-md transition flex items-center justify-center gap-2 ${
+        className={`btn btn-md btn-primary rounded-xl ${
           loading ? "opacity-70 cursor-not-allowed" : ""
         }`}
       >
         {loading ? (
-          <span className="animate-spin rounded-full h-5 w-5 border-t-2 border-white border-opacity-75" />
+          <span className="animate-spin h-5 w-5 border-t-2 border-white rounded-full" />
         ) : (
           tLang.submit
         )}
       </button>
 
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        sitekey={recaptchaKey}
-        size="invisible"
-        badge="bottomright"
-      />
+      <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />
     </motion.form>
   );
 }

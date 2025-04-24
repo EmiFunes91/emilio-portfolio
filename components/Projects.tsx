@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { usePreferences } from "../context/PreferencesContext";
 import { FaJava, FaLock, FaGithub } from "react-icons/fa";
 import {
   SiSpring,
@@ -18,22 +19,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Video, X } from "lucide-react";
 import ProjectCarousel from "./ProjectCarousel";
 
-type ProjectContent = {
-  title: string;
-  badge?: string;
-  description: string;
-};
-
-type Project = {
-  content: { es: ProjectContent; en: ProjectContent };
-  technologies: JSX.Element[];
-  codeLink: string;
-  demoLink?: string;
-  images: string[];
-  video?: string;
-};
-
-const projects: Project[] = [
+const projects = [
   {
     content: {
       es: {
@@ -94,7 +80,7 @@ const projects: Project[] = [
       "/projects/store-api/2.png",
       "/projects/store-api/3.png",
     ],
-    video: "/video/",
+    youtubeLink: "https://youtu.be/nTSNzoPEC7c",
   },
   {
     content: {
@@ -119,10 +105,7 @@ const projects: Project[] = [
       <FaLock key="jwt" />,
     ],
     codeLink: "https://github.com/EmiFunes91/QuickTasks",
-    images: [
-      "/projects/quicktasks/1.png",
-      "/projects/quicktasks/2.png",
-    ],
+    images: ["/projects/quicktasks/1.png", "/projects/quicktasks/2.png"],
   },
   {
     content: {
@@ -146,20 +129,32 @@ const projects: Project[] = [
     ],
     codeLink: "https://github.com/EmiFunes91/emilio-portfolio",
     demoLink: "https://emiliofunes-portfolio.vercel.app/",
-    images: [
-      "/projects/portfolio/1.png",
-    ],
+    images: ["/projects/portfolio/1.png"],
   },
 ];
 
-export default function Projects({
-  title,
-  language,
-}: {
-  title: string;
-  language: "es" | "en";
-}) {
+export default function Projects() {
+  const { language } = usePreferences();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+  const t = {
+    es: {
+      title: "Proyectos Destacados",
+      code: "Código",
+      demo: "Demo",
+      video: "Video",
+      youtube: "YouTube",
+    },
+    en: {
+      title: "Highlighted Projects",
+      code: "Code",
+      demo: "Demo",
+      video: "Video",
+      youtube: "YouTube",
+    },
+  };
+
+  const tLang = t[language];
 
   return (
     <section
@@ -170,12 +165,12 @@ export default function Projects({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl font-bold text-center mb-12"
+        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-12 text-blue-600 dark:text-blue-400 text-center"
       >
-        {title}
+        {tLang.title}
       </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {projects.map((project, index) => {
           const content = project.content[language];
           return (
@@ -186,7 +181,7 @@ export default function Projects({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex flex-col justify-between h-full rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg bg-white dark:bg-gray-900 p-6"
+              className="flex flex-col justify-between h-full rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl bg-white dark:bg-gray-900 p-6 transition-all"
             >
               <div>
                 <div className="flex justify-between items-center mb-4">
@@ -205,11 +200,11 @@ export default function Projects({
                   title={content.title}
                 />
 
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
                   {content.description}
                 </p>
 
-                <div className="flex flex-wrap gap-3 text-xl text-blue-500 dark:text-blue-400 mb-4">
+                <div className="flex flex-wrap gap-3 text-xl text-blue-500 dark:text-blue-400 mt-4">
                   {project.technologies.map((tech, i) => (
                     <span
                       key={i}
@@ -221,32 +216,42 @@ export default function Projects({
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 mt-4">
+              <div className="flex flex-wrap gap-3 mt-6">
                 <a
                   href={project.codeLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-sm btn-outline"
+                  className="btn btn-sm btn-outline rounded-xl flex items-center gap-2"
                 >
-                  <FaGithub className="w-4 h-4" /> Código
+                  <FaGithub className="w-4 h-4" /> {tLang.code}
                 </a>
                 {project.demoLink && (
                   <a
                     href={project.demoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary"
+                    className="btn btn-sm btn-primary rounded-xl flex items-center gap-2"
                   >
-                    <ExternalLink className="w-4 h-4" /> Demo
+                    <ExternalLink className="w-4 h-4" /> {tLang.demo}
                   </a>
                 )}
                 {project.video && (
                   <button
                     onClick={() => setSelectedVideo(project.video!)}
-                    className="btn btn-sm bg-indigo-600 text-white hover:bg-indigo-500"
+                    className="btn btn-sm bg-indigo-600 text-white hover:bg-indigo-500 rounded-xl flex items-center gap-2"
                   >
-                    <Video className="w-4 h-4" /> Video
+                    <Video className="w-4 h-4" /> {tLang.video}
                   </button>
+                )}
+                {project.youtubeLink && (
+                  <a
+                    href={project.youtubeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-sm bg-red-600 text-white hover:bg-red-500 rounded-xl flex items-center gap-2"
+                  >
+                    <Video className="w-4 h-4" /> {tLang.youtube}
+                  </a>
                 )}
               </div>
             </motion.div>

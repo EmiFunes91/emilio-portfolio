@@ -1,46 +1,49 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Quote } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Quote } from "lucide-react";
+import { usePreferences } from "../context/PreferencesContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 const testimonials = {
   es: [
     {
-      quote: 'Emilio demostró compromiso, proactividad y capacidad técnica. Recomendado 100%.',
-      client: 'Cliente en Fiverr',
+      quote:
+        "Emilio demostró compromiso, proactividad y capacidad técnica. Recomendado 100%.",
+      client: "Cliente en Fiverr",
     },
     {
-      quote: 'Un desarrollador confiable que entrega código limpio y mantiene una excelente comunicación.',
-      client: 'Startup de software',
+      quote:
+        "Un desarrollador confiable que entrega código limpio y mantiene una excelente comunicación.",
+      client: "Startup de software",
     },
     {
-      quote: 'Excelente experiencia trabajando con Emilio. Siempre va más allá para que todo funcione perfecto.',
-      client: 'Emprendedor independiente',
+      quote:
+        "Excelente experiencia trabajando con Emilio. Siempre va más allá para que todo funcione perfecto.",
+      client: "Emprendedor independiente",
     },
   ],
   en: [
     {
-      quote: 'Emilio showed commitment, proactivity, and technical skills. Highly recommended.',
-      client: 'Client on Fiverr',
+      quote:
+        "Emilio showed commitment, proactivity, and technical skills. Highly recommended.",
+      client: "Client on Fiverr",
     },
     {
-      quote: 'A reliable developer who delivers clean code and maintains excellent communication.',
-      client: 'Software startup',
+      quote:
+        "A reliable developer who delivers clean code and maintains excellent communication.",
+      client: "Software startup",
     },
     {
-      quote: 'Great experience working with Emilio. He always goes the extra mile to ensure everything works perfectly.',
-      client: 'Independent entrepreneur',
+      quote:
+        "Great experience working with Emilio. He always goes the extra mile to ensure everything works perfectly.",
+      client: "Independent entrepreneur",
     },
   ],
 };
 
-export default function Testimonials({
-  title,
-  language,
-}: {
-  title: string;
-  language: 'es' | 'en';
-}) {
+export default function Testimonials() {
+  const { language } = usePreferences();
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -51,18 +54,37 @@ export default function Testimonials({
   }, [language]);
 
   const { quote, client } = testimonials[language][index];
+  const title = language === "es" ? "Testimonios" : "Testimonials";
 
   return (
-    <section className="mt-10 max-w-4xl mx-auto" id="testimonios">
-      <h2 className="text-3xl font-semibold mb-6 text-center">{title}</h2>
-      <div className="p-6 md:p-8 rounded-xl shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-center transition-all duration-500">
-        <Quote className="mx-auto mb-3 text-blue-600 dark:text-blue-400 w-6 h-6" />
-        <p className="italic text-gray-700 dark:text-gray-300 text-lg transition-opacity duration-500">
-          “{quote}”
-        </p>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 font-medium">– {client}</p>
+    <section className="mt-24 max-w-4xl mx-auto px-4" id="testimonios">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-blue-600 dark:text-blue-400 text-center">
+        {title}
+      </h2>
+
+      <div
+        className="p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-center"
+        aria-live="polite"
+      >
+        <Quote className="mx-auto mb-4 text-blue-600 dark:text-blue-400 w-6 h-6" />
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={quote}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="italic text-gray-700 dark:text-gray-300 text-lg sm:text-xl transition-colors duration-300">
+              “{quote}”
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 font-medium">
+              – {client}
+            </p>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
 }
-
