@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
-import { usePreferences } from "../context/PreferencesContext";
-import { FaGithub, FaLock } from "react-icons/fa";
+import Image from 'next/image';
+import { useState } from 'react';
+import { usePreferences } from '../context/PreferencesContext';
+import { FaGithub, FaLock } from 'react-icons/fa';
 import {
   SiSpring,
   SiPostgresql,
@@ -14,25 +14,25 @@ import {
   SiTypescript,
   SiNextdotjs,
   SiDocker,
-} from "react-icons/si";
-import { motion } from "framer-motion";
-import { ExternalLink, Video, X } from "lucide-react";
-import ProjectCarousel from "./ProjectCarousel";
+} from 'react-icons/si';
+import { motion } from 'framer-motion';
+import { ExternalLink, Video, X, FileText } from 'lucide-react';
+import ProjectCarousel from './ProjectCarousel';
 
 const projects = [
   {
     content: {
       es: {
-        title: "GestiónPro (Sistema de Administración)",
-        badge: "Sistema completo",
+        title: 'GestiónPro (Sistema de Administración)',
+        badge: 'Sistema completo',
         description:
-          "Aplicación robusta con panel de control, gestión de usuarios, productos, cajeros y autenticación JWT. Ideal para entidades comerciales.",
+          'Aplicación robusta con panel de control, gestión de usuarios, productos, cajeros y autenticación JWT. Ideal para entidades comerciales.',
       },
       en: {
-        title: "GestiónPro (Admin System)",
-        badge: "Complete system",
+        title: 'GestiónPro (Admin System)',
+        badge: 'Complete system',
         description:
-          "Robust application with dashboard, user/product/cashier management, and JWT auth. Ideal for commercial businesses.",
+          'Robust application with dashboard, user/product/cashier management, and JWT auth. Ideal for commercial businesses.',
       },
     },
     technologies: [
@@ -43,27 +43,28 @@ const projects = [
       <SiBootstrap key="bootstrap" />,
       <SiDocker key="docker" />,
     ],
-    codeLink: "https://github.com/EmiFunes91/adm-empleados",
+    codeLink: 'https://github.com/EmiFunes91/adm-empleados',
+    docsLink: 'https://emilio-organization.gitbook.io/emilio-organization-docs',
     images: [
-      "/projects/gestionpro/1.png",
-      "/projects/gestionpro/2.png",
-      "/projects/gestionpro/3.png",
+      '/projects/gestionpro/1.png',
+      '/projects/gestionpro/2.png',
+      '/projects/gestionpro/3.png',
     ],
-    video: "/video/proyecto-gestioncomercial.mp4",
+    video: '/video/proyecto-gestioncomercial.mp4',
   },
   {
     content: {
       es: {
-        title: "Store API (CRUD + Auth)",
-        badge: "API Backend",
+        title: 'Store API (CRUD + Auth)',
+        badge: 'API Backend',
         description:
-          "API segura con Spring Security, gestión completa de productos y usuarios. Interfaz con Thymeleaf.",
+          'API segura con Spring Security, gestión completa de productos y usuarios. Interfaz con Thymeleaf.',
       },
       en: {
-        title: "Store API (CRUD + Auth)",
-        badge: "Backend API",
+        title: 'Store API (CRUD + Auth)',
+        badge: 'Backend API',
         description:
-          "Secure API with Spring Security, complete product and user management. Thymeleaf interface.",
+          'Secure API with Spring Security, complete product and user management. Thymeleaf interface.',
       },
     },
     technologies: [
@@ -72,27 +73,27 @@ const projects = [
       <SiThymeleaf key="thymeleaf" />,
       <SiBootstrap key="bootstrap" />,
     ],
-    codeLink: "https://github.com/EmiFunes91/store",
+    codeLink: 'https://github.com/EmiFunes91/store',
     images: [
-      "/projects/store-api/1.png",
-      "/projects/store-api/2.png",
-      "/projects/store-api/3.png",
+      '/projects/store-api/1.png',
+      '/projects/store-api/2.png',
+      '/projects/store-api/3.png',
     ],
-    youtubeLink: "https://youtu.be/nTSNzoPEC7c",
+    youtubeLink: 'https://youtu.be/nTSNzoPEC7c',
   },
   {
     content: {
       es: {
-        title: "QuickTasks (App de Tareas)",
-        badge: "Fullstack en progreso",
+        title: 'QuickTasks (App de Tareas)',
+        badge: 'Fullstack en progreso',
         description:
-          "Fullstack en desarrollo. Backend en Spring Boot con JWT. Frontend en React + Tailwind. Despliegue en GitHub Pages.",
+          'Fullstack en desarrollo. Backend en Spring Boot con JWT. Frontend en React + Tailwind. Despliegue en GitHub Pages.',
       },
       en: {
-        title: "QuickTasks (Task App)",
-        badge: "Fullstack in progress",
+        title: 'QuickTasks (Task App)',
+        badge: 'Fullstack in progress',
         description:
-          "Fullstack in development. Backend with Spring Boot + JWT, frontend with React + Tailwind. Hosted on GitHub Pages.",
+          'Fullstack in development. Backend with Spring Boot + JWT, frontend with React + Tailwind. Hosted on GitHub Pages.',
       },
     },
     technologies: [
@@ -102,22 +103,22 @@ const projects = [
       <SiDocker key="docker" />,
       <FaLock key="jwt" />,
     ],
-    codeLink: "https://github.com/EmiFunes91/QuickTasks",
-    images: ["/projects/quicktasks/1.png", "/projects/quicktasks/2.png"],
+    codeLink: 'https://github.com/EmiFunes91/QuickTasks',
+    images: ['/projects/quicktasks/1.png', '/projects/quicktasks/2.png'],
   },
   {
     content: {
       es: {
-        title: "Portfolio Profesional",
-        badge: "Frontend avanzado",
+        title: 'Portfolio Profesional',
+        badge: 'Frontend avanzado',
         description:
-          "Mi portfolio personal desarrollado con Next.js, TypeScript y Tailwind. Multi-idioma, modo claro/oscuro y diseño responsive.",
+          'Mi portfolio personal desarrollado con Next.js, TypeScript y Tailwind. Multi-idioma, modo claro/oscuro y diseño responsive.',
       },
       en: {
-        title: "Professional Portfolio",
-        badge: "Advanced frontend",
+        title: 'Professional Portfolio',
+        badge: 'Advanced frontend',
         description:
-          "My personal portfolio built with Next.js, TypeScript and Tailwind. Multi-language, dark/light mode and responsive design.",
+          'My personal portfolio built with Next.js, TypeScript and Tailwind. Multi-language, dark/light mode and responsive design.',
       },
     },
     technologies: [
@@ -125,9 +126,9 @@ const projects = [
       <SiTypescript key="ts" />,
       <SiTailwindcss key="tailwind" />,
     ],
-    codeLink: "https://github.com/EmiFunes91/emilio-portfolio",
-    demoLink: "https://emiliofunes-portfolio.vercel.app/",
-    images: ["/projects/portfolio/1.png"],
+    codeLink: 'https://github.com/EmiFunes91/emilio-portfolio',
+    demoLink: 'https://emiliofunes-portfolio.vercel.app/',
+    images: ['/projects/portfolio/1.png'],
   },
 ];
 
@@ -137,18 +138,20 @@ export default function Projects() {
 
   const t = {
     es: {
-      title: "Proyectos Destacados",
-      code: "Código",
-      demo: "Demo",
-      video: "Video",
-      youtube: "YouTube",
+      title: 'Proyectos Destacados',
+      code: 'Código',
+      demo: 'Demo',
+      video: 'Video',
+      youtube: 'YouTube',
+      docs: 'Docs',
     },
     en: {
-      title: "Highlighted Projects",
-      code: "Code",
-      demo: "Demo",
-      video: "Video",
-      youtube: "YouTube",
+      title: 'Highlighted Projects',
+      code: 'Code',
+      demo: 'Demo',
+      video: 'Video',
+      youtube: 'YouTube',
+      docs: 'Docs',
     },
   };
 
@@ -164,7 +167,6 @@ export default function Projects() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-12 text-gray-900 dark:text-white text-center"
-
       >
         {tLang.title}
       </motion.h2>
@@ -194,7 +196,10 @@ export default function Projects() {
                   )}
                 </div>
 
-                <ProjectCarousel images={project.images} title={content.title} />
+                <ProjectCarousel
+                  images={project.images}
+                  title={content.title}
+                />
 
                 <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
                   {content.description}
@@ -202,7 +207,10 @@ export default function Projects() {
 
                 <div className="flex flex-wrap gap-3 text-xl text-blue-500 dark:text-blue-400 mt-4">
                   {project.technologies.map((tech, i) => (
-                    <span key={i} className="hover:scale-110 transition-transform">
+                    <span
+                      key={i}
+                      className="hover:scale-110 transition-transform"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -226,6 +234,16 @@ export default function Projects() {
                     className="btn btn-sm btn-primary rounded-xl flex items-center gap-2"
                   >
                     <ExternalLink className="w-4 h-4" /> {tLang.demo}
+                  </a>
+                )}
+                {project.docsLink && (
+                  <a
+                    href={project.docsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-sm bg-gray-800 text-white hover:bg-gray-700 rounded-xl flex items-center gap-2"
+                  >
+                    <FileText className="w-4 h-4" /> {tLang.docs}
                   </a>
                 )}
                 {project.video && (
@@ -284,5 +302,4 @@ export default function Projects() {
     </section>
   );
 }
-
 
