@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import ScrollReset from '../components/ScrollReset';
 import { PreferencesProvider } from '../context/PreferencesContext';
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PreferencesProvider>
           <ScrollReset />
           {children}
+          <Analytics />
         </PreferencesProvider>
       </body>
     </html>
