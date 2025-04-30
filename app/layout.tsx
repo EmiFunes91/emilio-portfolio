@@ -1,41 +1,63 @@
-import './styles/globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import ScrollReset from '../components/ScrollReset';
-import { PreferencesProvider } from '../context/PreferencesContext';
-import { Analytics } from "@vercel/analytics/react"
+import "./styles/globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import ScrollReset from "../components/ScrollReset";
+import { PreferencesProvider } from "../context/PreferencesContext";
+import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: 'Portfolio Emilio Funes',
-  description: 'Desarrollador Backend | Java, Spring Boot, PHP, Laravel',
+  title: "Portfolio Emilio Funes",
+  description: "Desarrollador Backend | Java, Spring Boot, PHP, Laravel",
   openGraph: {
-    title: 'Portfolio Emilio Funes',
-    description: 'Demostración profesional de proyectos backend con Java, Spring Boot, PHP y Laravel.',
-    url: 'https://emiliofunes-portfolio.vercel.app/',
-    siteName: 'Emilio Funes Portfolio',
+    title: "Portfolio Emilio Funes",
+    description:
+      "Demostración profesional de proyectos backend con Java, Spring Boot, PHP y Laravel.",
+    url: "https://emiliofunes-portfolio.vercel.app/",
+    siteName: "Emilio Funes Portfolio",
     images: [
       {
-        url: 'https://emiliofunes-portfolio.vercel.app/og-image.png',
+        url: "https://emiliofunes-portfolio.vercel.app/og-image.png",
         width: 1200,
         height: 630,
-        alt: 'Emilio Funes Portfolio',
+        alt: "Emilio Funes Portfolio",
       },
     ],
-    type: 'website',
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Portfolio Emilio Funes',
-    description: 'Proyectos backend con Java, Spring Boot, PHP, Laravel y más.',
-    images: ['https://emiliofunes-portfolio.vercel.app/og-image.png'],
+    card: "summary_large_image",
+    title: "Portfolio Emilio Funes",
+    description: "Proyectos backend con Java, Spring Boot, PHP, Laravel y más.",
+    images: ["https://emiliofunes-portfolio.vercel.app/og-image.png"],
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="es" className="scroll-smooth">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7RQ5532SW4"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-7RQ5532SW4');
+          `}
+        </Script>
+      </head>
       <body
         className={`
           ${inter.variable}
@@ -54,5 +76,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
-
