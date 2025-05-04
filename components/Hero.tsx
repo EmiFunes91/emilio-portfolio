@@ -16,6 +16,7 @@ export default function Hero() {
       contact: "Contacto",
       cvLabel: "Ver CV",
       alt: "Bandera de España",
+      viewProjects: "Ver proyectos",
     },
     en: {
       name: "Emilio Funes",
@@ -23,10 +24,11 @@ export default function Hero() {
       contact: "Contact",
       cvLabel: "View CV",
       alt: "UK Flag",
+      viewProjects: "View Projects",
     },
   };
 
-  const { name, role, contact, cvLabel, alt } = t[language];
+  const { name, role, contact, cvLabel, alt, viewProjects } = t[language];
   const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes-CV-${language}.pdf`;
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
@@ -65,6 +67,14 @@ export default function Hero() {
             <span className="text-sm font-medium">{cvLabel}</span>
             <Image src={flagSrc} alt={alt} width={20} height={20} />
           </a>
+
+          <a
+            href="#proyectos"
+            className="group inline-flex items-center gap-2 rounded-xl px-5 py-2 bg-indigo-600 text-white hover:bg-indigo-500 shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            🚀
+            <span className="text-sm font-medium">{viewProjects}</span>
+          </a>
         </div>
 
         <div className="flex justify-center gap-6 pt-4 text-gray-600 dark:text-gray-300">
@@ -89,4 +99,5 @@ export default function Hero() {
     </section>
   );
 }
+
 

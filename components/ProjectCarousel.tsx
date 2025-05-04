@@ -16,15 +16,27 @@ export default function ProjectCarousel({
   const [modalImg, setModalImg] = useState<string | null>(null);
 
   const next = () => setCurrent((prev) => (prev + 1) % images.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  const prev = () =>
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") setModalImg(null);
     };
+
     document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, []);
+
+    if (modalImg) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [modalImg]);
 
   return (
     <div className="relative overflow-hidden rounded-xl mb-4 group bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -43,10 +55,14 @@ export default function ProjectCarousel({
             src={images[current]}
             alt={`${title} - Imagen ${current + 1}`}
             fill
-            className="object-cover object-top rounded-xl cursor-pointer"
+            role="button"
+            tabIndex={0}
+            title={`${title} - Imagen ampliada`}
+            className="object-cover object-top rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => setModalImg(images[current])}
+            onKeyDown={(e) => e.key === "Enter" && setModalImg(images[current])}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            priority
+            priority={current === 0}
           />
         </motion.div>
 
@@ -124,4 +140,3 @@ export default function ProjectCarousel({
     </div>
   );
 }
-

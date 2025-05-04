@@ -35,12 +35,12 @@ export default function Stack() {
   const { title, subtitle } = t[language];
 
   return (
-    <section className="mt-24 max-w-6xl mx-auto px-4" id="stack">
+    <section id="stack" className="scroll-mt-24 py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white text-center"
       >
         {title}
@@ -50,7 +50,7 @@ export default function Stack() {
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         className="text-center text-base sm:text-lg text-gray-600 dark:text-gray-400 mt-2 mb-10 max-w-2xl mx-auto"
       >
         {subtitle}
@@ -60,19 +60,17 @@ export default function Stack() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center"
       >
         {technologies.map((tech, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center justify-center gap-2 p-3 hover:scale-105 transition-transform duration-300"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.08 }}
+            className="flex flex-col items-center justify-center gap-2 p-3 transition-transform duration-300"
           >
             <div className="w-9 h-9 flex items-center justify-center">{tech.icon}</div>
-            <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
-              {tech.label}
-            </span>
+            <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300">{tech.label}</span>
           </motion.div>
         ))}
       </motion.div>
