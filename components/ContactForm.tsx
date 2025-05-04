@@ -121,7 +121,7 @@ export default function ContactForm() {
   return (
     <motion.form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto mt-8 space-y-4"
+      className="card-glow max-w-xl mx-auto space-y-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
@@ -138,7 +138,7 @@ export default function ContactForm() {
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderName}
-          className="w-full px-4 py-3 rounded-xl text-base bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="input"
         />
       </div>
 
@@ -151,7 +151,7 @@ export default function ContactForm() {
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderEmail}
-          className="w-full px-4 py-3 rounded-xl text-base bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="input"
         />
       </div>
 
@@ -164,7 +164,7 @@ export default function ContactForm() {
           onChange={handleChange}
           disabled={loading}
           placeholder={tLang.placeholderMessage}
-          className="w-full px-4 py-3 rounded-xl text-base bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="input"
         />
       </div>
 
