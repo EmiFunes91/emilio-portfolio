@@ -50,7 +50,7 @@ const projects = [
       "/projects/gestionpro/2.png",
       "/projects/gestionpro/3.png",
     ],
-    video: "/video/proyecto-gestioncomercial.mp4",
+    youtubeLink: "https://youtu.be/3zreFzfJtto",
   },
   {
     content: {
@@ -132,6 +132,11 @@ const projects = [
   },
 ];
 
+function getYouTubeId(url: string) {
+  const match = url.match(/(?:youtu\.be\/|v=)([^&]+)/);
+  return match ? match[1] : "";
+}
+
 export default function Projects() {
   const { language } = usePreferences();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -164,7 +169,7 @@ export default function Projects() {
   return (
     <section
       id="proyectos"
-      className="py-20 px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto"
+      className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto"
     >
       {/* CTA introductorio */}
       <motion.h2
@@ -219,15 +224,18 @@ export default function Projects() {
 
                 {/* Tooltips en tecnologías */}
                 <div className="flex flex-wrap gap-3 text-xl text-blue-500 dark:text-blue-400 mt-4">
-                  {project.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="hover:scale-110 transition-transform"
-                      title={tech?.type?.name?.replace(/^Si|Fa/, "") ?? ""}
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {project.technologies.map((tech, i) => {
+                    const key = tech?.key ?? `${project.codeLink}-tech-${i}`;
+                    return (
+                      <span
+                        key={key}
+                        className="hover:scale-110 transition-transform"
+                        title={tech?.type?.name?.replace(/^Si|Fa/, "") ?? ""}
+                      >
+                        {tech}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -261,23 +269,13 @@ export default function Projects() {
                     <FileText className="w-4 h-4" /> {tLang.docs}
                   </a>
                 )}
-                {project.video && (
-                  <button
-                    onClick={() => setSelectedVideo(project.video!)}
-                    className="btn btn-sm bg-indigo-600 text-white hover:bg-indigo-500 rounded-xl flex items-center gap-2"
-                  >
-                    <Video className="w-4 h-4" /> {tLang.video}
-                  </button>
-                )}
                 {project.youtubeLink && (
-                  <a
-                    href={project.youtubeLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm bg-red-600 text-white hover:bg-red-500 rounded-xl flex items-center gap-2"
+                  <button
+                    onClick={() => setSelectedVideo(project.youtubeLink!)}
+                    className="btn btn-sm bg-red-600 text-white hover:bg-red-500 rounded-xl flex items-center gap-2 animate-pulse hover:animate-none"
                   >
                     <Video className="w-4 h-4" /> {tLang.youtube}
-                  </a>
+                  </button>
                 )}
               </div>
             </motion.div>
@@ -302,27 +300,31 @@ export default function Projects() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={() => setSelectedVideo(null)}
+          onKeyDown={(e) => e.key === "Escape" && setSelectedVideo(null)}
+          tabIndex={-1}
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="relative w-[90%] max-w-4xl bg-white dark:bg-gray-900 p-6 rounded-lg shadow-2xl"
+            transition={{ duration: 0.3 }}
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-4xl px-4 sm:px-6"
           >
-            <button
-              onClick={() => setSelectedVideo(null)}
-              className="absolute top-3 right-3 p-2 bg-gray-700 text-white rounded-full hover:bg-red-500 transition"
-              aria-label="Cerrar video"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            <motion.video
-              src={selectedVideo}
-              controls
-              className="w-full max-h-[75vh] rounded-lg"
-              whileHover={{ scale: 1.01 }}
-            />
+            <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-xl shadow-lg">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${getYouTubeId(
+                  selectedVideo
+                )}`}
+                title="YouTube Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
           </motion.div>
         </motion.div>
       )}

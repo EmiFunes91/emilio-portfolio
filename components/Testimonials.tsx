@@ -66,7 +66,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="mt-24 max-w-4xl mx-auto px-4" id="testimonios">
+    <section id="testimonios" className="scroll-mt-24 mt-24 max-w-4xl mx-auto px-4">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
