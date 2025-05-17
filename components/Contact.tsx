@@ -23,7 +23,7 @@ export default function Contact() {
   const { title, description } = t[language];
 
   return (
-    <section id="contacto" className="mt-24 max-w-4xl mx-auto px-4">
+    <section id="contacto" className="scroll-mt-24 mt-24 max-w-4xl mx-auto px-4">
       <div className="text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
