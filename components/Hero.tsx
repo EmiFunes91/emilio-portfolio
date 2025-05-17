@@ -1,11 +1,15 @@
 "use client";
 
 import { Mail, FileText } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaSnowflake } from "react-icons/fa";
+import type { IconBaseProps } from "react-icons";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { usePreferences } from "../context/PreferencesContext";
-import { FaSnowflake } from "react-icons/fa";
+
+const GithubIcon: React.ComponentType<IconBaseProps> = FaGithub;
+const LinkedInIcon: React.ComponentType<IconBaseProps> = FaLinkedin;
+const SnowflakeIcon: React.ComponentType<IconBaseProps> = FaSnowflake;
 
 export default function Hero() {
   const { language } = usePreferences();
@@ -31,8 +35,7 @@ export default function Hero() {
     },
   };
 
-  const { name, role, contact, cvLabel, alt, viewProjects, openSource } =
-    t[language];
+  const { name, role, contact, cvLabel, alt, viewProjects } = t[language];
   const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes-CV-${language}.pdf`;
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
@@ -55,7 +58,6 @@ export default function Hero() {
           {role}
         </p>
 
-        {/* Botones de acción */}
         <div className="flex justify-center flex-wrap gap-4 pt-2">
           <a
             href="mailto:emilio.ifunes@hotmail.es"
@@ -85,7 +87,6 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Íconos sociales + Open Source */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,7 +101,7 @@ export default function Hero() {
               className="hover:text-black dark:hover:text-white transition"
               aria-label="GitHub"
             >
-              <FaGithub className="w-6 h-6" />
+              <GithubIcon className="w-6 h-6" />
             </a>
             <a
               href="https://www.linkedin.com/in/emilio-funes-8b140b21a/"
@@ -109,7 +110,7 @@ export default function Hero() {
               className="hover:text-blue-600 dark:hover:text-blue-400 transition"
               aria-label="LinkedIn"
             >
-              <FaLinkedin className="w-6 h-6" />
+              <LinkedInIcon className="w-6 h-6" />
             </a>
           </div>
           <a
@@ -117,23 +118,20 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium rounded-full bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 hover:shadow-md transition animate-pulse hover:animate-none"
-            title="Contribución a Winter CMS"
+            title="Contribución a Winter CMS (Canadá)"
           >
-            <FaGithub className="w-4 h-4" />
-            <span>
-              {language === "es" ? (
-                <>
-                  Open Source •{" "}
-                  <FaSnowflake className="inline-block w-4 h-4 -mt-0.5 mr-1" />
-                  Winter CMS
-                </>
-              ) : (
-                <>
-                  Open Source •{" "}
-                  <FaSnowflake className="inline-block w-4 h-4 -mt-0.5 mr-1" />
-                  Winter CMS
-                </>
-              )}
+            <GithubIcon className="w-4 h-4" />
+            <span className="inline-flex items-center gap-1">
+              Open Source •
+              <SnowflakeIcon className="w-4 h-4 -mt-0.5" />
+              Winter CMS
+              <Image
+                src="/icons/ca.svg"
+                alt="Bandera de Canadá"
+                width={16}
+                height={12}
+                className="ml-1"
+              />
             </span>
           </a>
         </motion.div>
