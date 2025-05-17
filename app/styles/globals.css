@@ -4,6 +4,8 @@
 
 @import "./classes.css";
 @import 'keen-slider/keen-slider.min.css';
+@import '@fontsource/inter/latin.css';
+
 
 /* Suavizar cambios entre modos claro/oscuro */
 * {
@@ -65,3 +67,23 @@ html:not(.dark) select {
   scrollbar-width: none;
 }
 
+@layer base {
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight;
+  }
+  h2 {
+    @apply text-3xl md:text-4xl font-bold leading-snug;
+  }
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+  h4 {
+    @apply text-xl font-medium;
+  }
+  p {
+    @apply text-base leading-relaxed;
+  }
+  small {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+  }
+}
