@@ -96,8 +96,8 @@ El sitio está desplegado automáticamente en **Vercel** cada vez que se hace un
 
 Si te interesa colaborar o estás buscando un desarrollador backend comprometido y profesional:
 
-- 🔗 [LinkedIn](https://www.linkedin.com/in/emiliofunesdev)
-- 📧 emiliofunesdev@gmail.com
+- 🔗 [LinkedIn](https://www.linkedin.com/in/emilio-funes-8b140b21a/)
+- 📧 emilio.ifunes@hotmail.es
 - 🌐 [Portfolio Web](https://emiliofunes-portfolio.vercel.app/)
 
 ---
