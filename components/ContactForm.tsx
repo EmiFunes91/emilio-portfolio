@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from "@emailjs/browser";
 import { usePreferences } from "../context/PreferencesContext";
+import { FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaYoutube } from "react-icons/fa";
+import ActionButton from "./ui/ActionButton";
 
 export default function ContactForm() {
   const { language } = usePreferences();
@@ -12,6 +14,8 @@ export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [touched, setTouched] = useState({ name: false, email: false, message: false });
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [showRecaptcha, setShowRecaptcha] = useState(false);
 
@@ -25,32 +29,26 @@ export default function ContactForm() {
       name: "Nombre",
       email: "Correo electrónico",
       message: "Mensaje",
-      placeholderName: "Tu nombre",
-      placeholderEmail: "tucorreo@ejemplo.com",
-      placeholderMessage: "¿En qué puedo ayudarte?",
-      submit: "Enviar mensaje",
-      error: "Todos los campos son obligatorios.",
-      invalidEmail: "El correo electrónico no es válido.",
-      success: "¡Gracias! Tu mensaje fue enviado correctamente.",
-      errorSend: "Hubo un problema al enviar el mensaje.",
-      errorNetwork: "Error de red al enviar el formulario.",
-      errorCaptcha: "Completa la verificación reCAPTCHA.",
+      send: "Enviar mensaje",
+      sending: "Enviando...",
+      success: "¡Mensaje enviado con éxito! Gracias por contactarme.",
+      error: "Ocurrió un error. Intenta nuevamente.",
+      required: "Este campo es obligatorio.",
+      privacy: "Nunca comparto tus datos. Solo los uso para responder tu mensaje.",
+      youtube: "Ver video"
     },
     en: {
       name: "Name",
       email: "Email",
       message: "Message",
-      placeholderName: "Your name",
-      placeholderEmail: "you@example.com",
-      placeholderMessage: "How can I help you?",
-      submit: "Send message",
-      error: "All fields are required.",
-      invalidEmail: "Invalid email address.",
-      success: "Thank you! Your message has been sent successfully.",
-      errorSend: "There was an issue sending the message.",
-      errorNetwork: "Network error while submitting the form.",
-      errorCaptcha: "Please complete the reCAPTCHA.",
-    },
+      send: "Send message",
+      sending: "Sending...",
+      success: "Message sent successfully! Thank you for reaching out.",
+      error: "Something went wrong. Please try again.",
+      required: "This field is required.",
+      privacy: "I never share your data. I only use it to reply to your message.",
+      youtube: "Watch video"
+    }
   };
 
   const tLang = t[language];
@@ -69,6 +67,10 @@ export default function ContactForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
@@ -76,7 +78,7 @@ export default function ContactForm() {
       return;
     }
     if (!validateEmail(formData.email)) {
-      setError(tLang.invalidEmail);
+      setError(tLang.error);
       return;
     }
 
@@ -88,7 +90,7 @@ export default function ContactForm() {
       recaptchaRef.current?.reset();
 
       if (!token) {
-        setError(tLang.errorCaptcha);
+        setError(tLang.error);
         setLoading(false);
         return;
       }
@@ -108,86 +110,88 @@ export default function ContactForm() {
       if (result.status === 200) {
         setSubmitted(true);
         setFormData({ name: "", email: "", message: "" });
+        setSuccess(true);
       } else {
-        setError(tLang.errorSend);
+        setError(tLang.error);
       }
     } catch {
-      setError(tLang.errorNetwork);
+      setError(tLang.error);
     } finally {
       setLoading(false);
     }
   };
 
+  // Validación simple
+  const isEmpty = (field: string) => !formData[field].trim();
+
   return (
-    <motion.form
+    <form className="w-full max-w-lg mx-auto bg-white/90 dark:bg-gray-900/90 rounded-2xl shadow-2xl p-6 sm:p-10 flex flex-col gap-7 border border-gray-100 dark:border-gray-800 backdrop-blur-md"
       onSubmit={handleSubmit}
-      className="card-glow max-w-xl mx-auto space-y-4"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      autoComplete="off"
     >
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      {submitted && <p className="text-green-500 text-sm">{tLang.success}</p>}
-
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-1">{tLang.name}</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-200">
+          {tLang.name}
+        </label>
         <input
-          type="text"
+          id="name"
           name="name"
-          value={formData.name}
-          onChange={handleChange}
-          disabled={loading}
-          placeholder={tLang.placeholderName}
-          className="input"
+          type="text"
+          required
+          className="px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 transition-all placeholder-gray-400 text-base shadow-sm"
+          placeholder={tLang.name}
         />
       </div>
-
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-1">{tLang.email}</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-200">
+          {tLang.email}
+        </label>
         <input
-          type="email"
+          id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
-          disabled={loading}
-          placeholder={tLang.placeholderEmail}
-          className="input"
+          type="email"
+          required
+          className="px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 transition-all placeholder-gray-400 text-base shadow-sm"
+          placeholder={tLang.email}
         />
       </div>
-
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-1">{tLang.message}</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="message" className="text-sm font-medium text-gray-700 dark:text-gray-200">
+          {tLang.message}
+        </label>
         <textarea
+          id="message"
           name="message"
-          rows={4}
-          value={formData.message}
-          onChange={handleChange}
-          disabled={loading}
-          placeholder={tLang.placeholderMessage}
-          className="input"
+          rows={5}
+          required
+          className="px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 transition-all placeholder-gray-400 text-base shadow-sm resize-none"
+          placeholder={tLang.message}
         />
       </div>
-
-      <button
+      <ActionButton
         type="submit"
         disabled={loading}
-        className={`btn btn-md btn-primary rounded-xl ${
-          loading ? "opacity-70 cursor-not-allowed" : ""
-        }`}
+        className="mt-2 w-full flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+        variant="demo"
+        title={tLang.send}
       >
-        {loading ? (
-          <span className="animate-spin h-5 w-5 border-t-2 border-white rounded-full" />
-        ) : (
-          tLang.submit
-        )}
-      </button>
-
-      {showRecaptcha && (
-        <div style={{ display: "none" }}>
-          <ReCAPTCHA ref={recaptchaRef} sitekey={recaptchaKey} size="invisible" />
+        <FaPaperPlane className="w-5 h-5" />
+        {loading ? tLang.sending : tLang.send}
+      </ActionButton>
+      {success && (
+        <div className="text-green-600 dark:text-green-400 text-center text-base mt-2 animate-fade-in font-semibold">
+          {tLang.success}
         </div>
       )}
-    </motion.form>
+      {error && (
+        <div className="text-red-600 dark:text-red-400 text-center text-base mt-2 animate-fade-in font-semibold">
+          {tLang.error}
+        </div>
+      )}
+      <div className="text-xs text-gray-400 dark:text-gray-500 text-center mt-2 select-none">
+        {tLang.privacy}
+      </div>
+    </form>
   );
 }
 

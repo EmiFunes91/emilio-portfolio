@@ -4,20 +4,30 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePreferences } from "../context/PreferencesContext";
 
 export default function ProjectCarousel({
   images,
   title,
 }: {
-  images: string[];
+  images: (string | { src: string; alt?: { es: string; en: string } })[];
   title: string;
 }) {
   const [current, setCurrent] = useState(0);
   const [modalImg, setModalImg] = useState<string | null>(null);
+  const { language: contextLanguage } = usePreferences();
+  const language = contextLanguage || "es";
 
-  const next = () => setCurrent((prev) => (prev + 1) % images.length);
+  // Normalizar imágenes para aceptar ambos formatos
+  const normalizedImages = images.map((img) =>
+    typeof img === "string"
+      ? { src: img, alt: { es: title, en: title } }
+      : { src: img.src, alt: img.alt || { es: title, en: title } }
+  );
+
+  const next = () => setCurrent((prev) => (prev + 1) % normalizedImages.length);
   const prev = () =>
-    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+    setCurrent((prev) => (prev - 1 + normalizedImages.length) % normalizedImages.length);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -45,22 +55,30 @@ export default function ProjectCarousel({
         style={{ aspectRatio: "16 / 9", height: "auto" }}
       >
         <motion.div
-          key={images[current]}
+          key={normalizedImages[current].src}
           initial={{ opacity: 0.4, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4 }}
           className="relative w-full h-full"
         >
           <Image
-            src={images[current]}
-            alt={`${title} - Imagen ${current + 1}`}
+            src={normalizedImages[current].src}
+            alt={
+              normalizedImages[current].alt && normalizedImages[current].alt[language]
+                ? normalizedImages[current].alt[language]
+                : title
+            }
             fill
             role="button"
             tabIndex={0}
-            title={`${title} - Imagen ampliada`}
+            title={
+              normalizedImages[current].alt && normalizedImages[current].alt[language]
+                ? normalizedImages[current].alt[language]
+                : title
+            }
             className="object-cover object-top rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onClick={() => setModalImg(images[current])}
-            onKeyDown={(e) => e.key === "Enter" && setModalImg(images[current])}
+            onClick={() => setModalImg(normalizedImages[current].src)}
+            onKeyDown={(e) => e.key === "Enter" && setModalImg(normalizedImages[current].src)}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             priority={current === 0}
           />
@@ -68,7 +86,7 @@ export default function ProjectCarousel({
 
         {/* Dots de navegación */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {images.map((_, i) => (
+          {normalizedImages.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
@@ -110,14 +128,14 @@ export default function ProjectCarousel({
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur"
             role="dialog"
             aria-modal="true"
-            onClick={() => setModalImg(null)} // ✅ cerrar al tocar el fondo
+            onClick={() => setModalImg(null)}
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               className="relative w-full max-w-4xl p-4"
-              onClick={(e) => e.stopPropagation()} // 🛑 evita cerrar al tocar el modal
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setModalImg(null)}
@@ -128,7 +146,11 @@ export default function ProjectCarousel({
               </button>
               <Image
                 src={modalImg}
-                alt="Vista ampliada"
+                alt={
+                  normalizedImages[current].alt && normalizedImages[current].alt[language]
+                    ? normalizedImages[current].alt[language]
+                    : title
+                }
                 width={1280}
                 height={720}
                 className="rounded-xl object-contain w-full max-h-[80vh]"

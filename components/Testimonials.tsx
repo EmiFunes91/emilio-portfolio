@@ -66,13 +66,13 @@ export default function Testimonials() {
   };
 
   return (
-    <section id="testimonios" className="scroll-mt-24 mt-24 max-w-4xl mx-auto px-4">
+    <section id="testimonios" className="scroll-mt-24 mt-24 max-w-4xl mx-auto px-4 py-20">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-center mb-4 text-gray-900 dark:text-white"
+        className="section-title text-center mb-2"
       >
         {t[language].title}
       </motion.h2>
@@ -82,7 +82,7 @@ export default function Testimonials() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto"
+        className="section-subtitle text-center mb-8 max-w-2xl mx-auto"
       >
         {t[language].subtitle}
       </motion.p>
