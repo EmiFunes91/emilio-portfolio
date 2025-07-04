@@ -13,15 +13,41 @@
 }
 
 html {
+  font-family: 'Inter', system-ui, sans-serif;
   scroll-behavior: smooth;
 }
 
 body {
-  @apply font-sans antialiased scroll-smooth bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-white;
+  @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-semibold tracking-tight;
+  @apply font-extrabold text-gray-900 dark:text-white mb-4;
+  line-height: 1.2;
+}
+
+h1 {
+  @apply text-4xl sm:text-5xl md:text-6xl;
+}
+h2 {
+  @apply text-3xl sm:text-4xl md:text-5xl;
+}
+h3 {
+  @apply text-2xl sm:text-3xl;
+}
+
+p, ul, ol {
+  margin-bottom: 1.25rem;
+}
+
+section {
+  @apply py-20;
+}
+
+.max-w-main {
+  @apply max-w-4xl mx-auto;
 }
 
 /* Inputs y elementos interactivos */

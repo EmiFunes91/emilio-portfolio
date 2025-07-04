@@ -10,9 +10,13 @@ type Props = {
   onClick?: () => void;
   variant?: "default" | "demo" | "video";
   className?: string;
+  title?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  style?: React.CSSProperties;
 };
 
-export default function ActionButton({ children, href, onClick, variant = "default", className }: Props) {
+export default function ActionButton({ children, href, onClick, variant = "default", className, title, type, disabled, style }: Props) {
   const base =
     "inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition";
 
@@ -25,11 +29,11 @@ export default function ActionButton({ children, href, onClick, variant = "defau
   const styles = twMerge(base, variants[variant], className);
 
   return href ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={styles}>
+    <a href={href} target="_blank" rel="noopener noreferrer" className={styles} title={title} style={style}>
       {children}
     </a>
   ) : (
-    <button onClick={onClick} className={styles}>
+    <button onClick={onClick} className={styles} title={title} type={type} disabled={disabled} style={style}>
       {children}
     </button>
   );

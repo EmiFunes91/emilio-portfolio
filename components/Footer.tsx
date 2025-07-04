@@ -23,7 +23,7 @@ export default function Footer() {
   const tLang = t[language];
 
   return (
-    <footer className="mt-24 py-10 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+    <footer className="mt-24 py-6 sm:py-10 border-t border-gray-200 dark:border-gray-700 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ export default function Footer() {
         transition={{ duration: 0.6 }}
         className="flex flex-col items-center gap-4"
       >
-        <p className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
+        <p className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
           {tLang.rights}
         </p>
         <p className="text-xs sm:text-sm">{tLang.built}</p>

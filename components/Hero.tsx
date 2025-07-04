@@ -1,11 +1,12 @@
 "use client";
 
 import { Mail, FileText } from "lucide-react";
-import { FaGithub, FaLinkedin, FaSnowflake } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaSnowflake, FaFolderOpen, FaDownload } from "react-icons/fa";
 import type { IconBaseProps } from "react-icons";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { usePreferences } from "../context/PreferencesContext";
+import ActionButton from "./ui/ActionButton";
 
 const GithubIcon: React.ComponentType<IconBaseProps> = FaGithub;
 const LinkedInIcon: React.ComponentType<IconBaseProps> = FaLinkedin;
@@ -17,74 +18,66 @@ export default function Hero() {
   const t = {
     es: {
       name: "Emilio Funes",
+      title: "Fullstack Engineer · Cloud · DevOps · Arquitectura Escalable",
+      cta: "Desarrollo soluciones robustas, escalables y modernas para empresas y startups.",
       role: "Backend Developer | Java, Spring Boot, PHP, Laravel",
       contact: "Contacto",
       cvLabel: "Ver CV",
       alt: "Bandera de España",
       viewProjects: "Ver proyectos",
-      openSource: "Contribución Open Source",
+      downloadCV: "Descargar CV"
     },
     en: {
       name: "Emilio Funes",
+      title: "Fullstack Engineer · Cloud · DevOps · Scalable Architecture",
+      cta: "I build robust, scalable and modern solutions for companies and startups.",
       role: "Backend Developer | Java, Spring Boot, PHP, Laravel",
       contact: "Contact",
       cvLabel: "View CV",
       alt: "UK Flag",
-      viewProjects: "View Projects",
-      openSource: "Open Source Contribution",
+      viewProjects: "View projects",
+      downloadCV: "Download CV"
     },
   };
 
-  const { name, role, contact, cvLabel, alt, viewProjects } = t[language];
+  const { name, title, role, contact, cvLabel, alt, viewProjects, downloadCV } = t[language];
   const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes-CV-${language}.pdf`;
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
   return (
     <section
       id="inicio"
-      className="scroll-mt-24 text-center pt-24 md:pt-36 px-4"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="max-w-3xl mx-auto space-y-8"
+      className="flex flex-col items-center justify-center min-h-[70vh] text-center gap-6"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400">
+      <h1 className="text-4xl md:text-6xl font-extrabold mb-2">
           {name}
         </h1>
-
-        <p className="text-lg sm:text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300">
-          {role}
+      <h2 className="mt-2 text-lg md:text-2xl font-semibold text-white tracking-tight">
+        {title}
+      </h2>
+      <p className="text-base sm:text-lg text-gray-200 dark:text-gray-300 font-medium max-w-xl mx-auto mb-6">
+        {t[language].cta}
         </p>
-
-        <div className="flex justify-center flex-wrap gap-4 pt-2">
-          <a
-            href="mailto:emilio.ifunes@hotmail.es"
-            className="group inline-flex items-center gap-2 rounded-xl px-5 py-2 bg-blue-600 text-white shadow-md hover:shadow-lg hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      <div className="flex flex-wrap justify-center gap-4 mt-2">
+        <ActionButton
+          href="#proyectos"
+          variant="demo"
+          title={viewProjects}
+          className="px-6 py-3 text-base font-semibold shadow-lg"
           >
-            <Mail className="w-4 h-4" />
-            <span className="text-sm font-medium">{contact}</span>
-          </a>
-
-          <a
+          <FaFolderOpen className="w-5 h-5" />
+          {viewProjects}
+        </ActionButton>
+        <ActionButton
             href={cvLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-xl px-5 py-2 bg-gray-800 text-white hover:bg-gray-700 shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          variant="default"
+          title={language === "es" ? "Descargar CV en español" : "Download CV in English"}
+          className="px-6 py-3 text-base font-semibold border-2 border-blue-600 text-blue-700 dark:text-blue-300 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/30 shadow"
           >
-            <FileText className="w-4 h-4" />
-            <span className="text-sm font-medium">{cvLabel}</span>
-            <Image src={flagSrc} alt={alt} width={20} height={20} />
-          </a>
-
-          <a
-            href="#proyectos"
-            className="group inline-flex items-center gap-2 rounded-xl px-5 py-2 bg-indigo-600 text-white hover:bg-indigo-500 shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            🚀
-            <span className="text-sm font-medium">{viewProjects}</span>
-          </a>
+          <FaDownload className="w-5 h-5" />
+          {downloadCV}
+          <Image src={flagSrc} alt={alt} width={20} height={20} className="ml-1 rounded shadow-sm" />
+        </ActionButton>
         </div>
 
         <motion.div
@@ -117,7 +110,7 @@ export default function Hero() {
             href="https://github.com/wintercms/docs/pull/237"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium rounded-full bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 hover:shadow-md transition animate-pulse hover:animate-none"
+          className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-sm font-medium shadow-sm border border-blue-100 dark:border-blue-800 animate-pulse hover:animate-none"
             title="Contribución a Winter CMS (Canadá)"
           >
             <GithubIcon className="w-4 h-4" />
@@ -134,7 +127,6 @@ export default function Hero() {
               />
             </span>
           </a>
-        </motion.div>
       </motion.div>
     </section>
   );
