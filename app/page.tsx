@@ -41,7 +41,7 @@ export default function HomePage() {
         </FadeInSection>
 
         <FadeInSection>
-          <About title={tLang.about} text={tLang.aboutText} />
+          <About />
         </FadeInSection>
 
         <FadeInSection>
