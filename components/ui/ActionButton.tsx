@@ -31,6 +31,27 @@ export default function ActionButton({ children, href, onClick, variant = "defau
   // Detectar si es un enlace interno (comienza con #)
   const isInternalLink = href?.startsWith('#');
 
+  // Función para manejar el scroll suave en enlaces internos
+  const handleInternalLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isInternalLink) {
+      e.preventDefault();
+      const targetId = href!.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Calcular offset para considerar el navbar fijo
+        const navbarHeight = 80; // altura aproximada del navbar
+        const targetPosition = targetElement.offsetTop - navbarHeight;
+        
+        // Usar scrollTo con behavior smooth para mejor compatibilidad móvil
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
   return href ? (
     <a 
       href={href} 
@@ -39,6 +60,7 @@ export default function ActionButton({ children, href, onClick, variant = "defau
       className={styles} 
       title={title} 
       style={style}
+      onClick={isInternalLink ? handleInternalLinkClick : undefined}
     >
       {children}
     </a>
