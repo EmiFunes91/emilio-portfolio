@@ -132,7 +132,7 @@ export default function Stack() {
           >
             <div className="mb-1 sm:mb-2 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110 group-hover:shadow-lg">
               <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
-                {tech.icon}
+              {tech.icon}
               </div>
             </div>
             <span className="text-xs text-gray-700 dark:text-gray-300 font-medium mt-1 text-center leading-tight">

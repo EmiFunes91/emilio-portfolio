@@ -147,8 +147,8 @@ export default function RootLayout({
         {/* Favicon y manifest */}
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#2563eb" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
+        <meta name="theme-color" content="#0f172a" />
+        <meta name="msapplication-TileColor" content="#0f172a" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Google Analytics */}
