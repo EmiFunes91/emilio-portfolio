@@ -25,7 +25,8 @@ export default function Hero() {
       cvLabel: "Ver CV",
       alt: "Bandera de España",
       viewProjects: "Ver proyectos",
-      downloadCV: "Descargar CV"
+      downloadCV: "Descargar CV",
+      openSourceContribution: "Contribución a Winter CMS (Canadá)"
     },
     en: {
       name: "Emilio Funes",
@@ -36,11 +37,12 @@ export default function Hero() {
       cvLabel: "View CV",
       alt: "UK Flag",
       viewProjects: "View projects",
-      downloadCV: "Download CV"
+      downloadCV: "Download CV",
+      openSourceContribution: "Winter CMS Contribution (Canada)"
     },
   };
 
-  const { name, title, role, contact, cvLabel, alt, viewProjects, downloadCV } = t[language];
+  const { name, title, role, contact, cvLabel, alt, viewProjects, downloadCV, openSourceContribution } = t[language];
   const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes-CV-${language}.pdf`;
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
@@ -111,7 +113,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-sm font-medium shadow-sm border border-blue-100 dark:border-blue-800 animate-pulse hover:animate-none"
-            title="Contribución a Winter CMS (Canadá)"
+            title={openSourceContribution}
           >
             <GithubIcon className="w-4 h-4" />
             <span className="inline-flex items-center gap-1">

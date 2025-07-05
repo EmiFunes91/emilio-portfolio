@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { usePreferences } from "../context/PreferencesContext";
-import { FaGithub, FaLock, FaYoutube, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaLock, FaYoutube, FaExternalLinkAlt, FaPlay, FaCode } from "react-icons/fa";
 import {
   SiSpring,
   SiPostgresql,
@@ -64,6 +64,7 @@ const projects = [
       { src: "/projects/smart-advisor/documents.webp", alt: { es: "Gestión de documentos legales en Smart Advisor", en: "Legal documents management in Smart Advisor" } },
       { src: "/projects/smart-advisor/jurisprudence.webp", alt: { es: "Análisis de jurisprudencia en Smart Advisor", en: "Jurisprudence analysis in Smart Advisor" } },
     ],
+    youtubeLink: "https://youtu.be/pw2lzGQVkK0",
   },
   {
     content: {
@@ -222,28 +223,55 @@ export default function Projects() {
     es: {
       title: "Proyectos Destacados",
       subtitle: "Soluciones reales en web, cloud y DevOps.",
-      code: "Código",
-      demo: "Demo",
+      code: "Ver código fuente",
+      demo: "Ver demo en vivo",
       video: "Video",
       youtube: "YouTube",
-      docs: "Docs",
+      apiDemo: "API Demo",
+      docs: "Ver documentación",
+      // Tooltips específicos para cada proyecto
+      smartAdvisorDemo: "Demo de API con FastAPI",
+      stripeDemo: "Demo de integración Stripe",
+      gestionProDemo: "Demo del sistema de gestión",
+      storeApiDemo: "Demo de API REST",
       cta: "Cada proyecto refleja mi compromiso con la calidad, la escalabilidad y las mejores prácticas de ingeniería.",
       count: (n: number) => `${n} proyectos publicados`,
     },
     en: {
       title: "Highlighted Projects",
       subtitle: "Real-world solutions for web, cloud, and DevOps.",
-      code: "Code",
-      demo: "Demo",
+      code: "View source code",
+      demo: "View live demo",
       video: "Video",
       youtube: "YouTube",
-      docs: "Docs",
+      apiDemo: "API Demo",
+      docs: "View documentation",
+      // Specific tooltips for each project
+      smartAdvisorDemo: "FastAPI API Demo",
+      stripeDemo: "Stripe Integration Demo",
+      gestionProDemo: "Management System Demo",
+      storeApiDemo: "REST API Demo",
       cta: "Each project demonstrates my commitment to quality, scalability, and modern engineering best practices.",
       count: (n: number) => `${n} projects published`,
     },
   };
 
   const tLang = t[language];
+
+  // Función para obtener el tooltip específico del video según el proyecto
+  const getVideoTooltip = (projectTitle: string) => {
+    if (projectTitle.includes("Smart Advisor")) {
+      return tLang.smartAdvisorDemo;
+    } else if (projectTitle.includes("Stripe")) {
+      return tLang.stripeDemo;
+    } else if (projectTitle.includes("GestiónPro")) {
+      return tLang.gestionProDemo;
+    } else if (projectTitle.includes("Store API")) {
+      return tLang.storeApiDemo;
+    } else {
+      return tLang.youtube;
+    }
+  };
 
   return (
     <section id="proyectos" className="max-w-main mx-auto py-20">
@@ -326,7 +354,7 @@ export default function Projects() {
                 {project.youtubeLink && (
                   <ActionButton
                     onClick={() => setSelectedVideo(project.youtubeLink!)}
-                    title={tLang.youtube}
+                    title={getVideoTooltip(content.title)}
                     className="!bg-red-600 hover:!bg-red-700 text-white shadow-md"
                   >
                     <FaYoutube className="w-5 h-5 text-white" />
