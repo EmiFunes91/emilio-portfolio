@@ -21,6 +21,7 @@ import {
   SiDjango
 } from "react-icons/si";
 import { usePreferences } from "../context/PreferencesContext";
+import React from "react";
 
 export default function Stack() {
   const { language } = usePreferences();
@@ -114,36 +115,42 @@ export default function Stack() {
   const areas = ["backend", "frontend", "devops"];
 
   return (
-    <section id="stack" className="max-w-main mx-auto py-20">
+    <section id="stack" className="max-w-main mx-auto py-16 sm:py-20 px-4">
       <h2 className="section-title text-center mb-2">{t[language].title}</h2>
       <h3 className="section-subtitle text-center mb-2">{t[language].tagline}</h3>
-      <p className="text-center text-gray-500 dark:text-gray-400 italic mb-8">
+      <p className="text-center text-gray-500 dark:text-gray-400 italic mb-6 sm:mb-8 text-sm sm:text-base">
         {t[language].valuePhrase}
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 sm:gap-8 justify-items-center mb-10">
+      
+      {/* Grid de tecnologías optimizado para móvil */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-4 md:gap-8 justify-items-center mb-8 sm:mb-10">
         {techStack.map((tech) => (
           <div
             key={tech.name}
             title={t[language].tooltips[tech.name]}
-            className="flex flex-col items-center min-w-[70px] group"
+            className="flex flex-col items-center min-w-[60px] sm:min-w-[70px] group"
           >
-            <div className="mb-2 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110 group-hover:shadow-lg">
-              {tech.icon}
+            <div className="mb-1 sm:mb-2 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110 group-hover:shadow-lg">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
+                {tech.icon}
+              </div>
             </div>
-            <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-medium mt-1 text-center">
+            <span className="text-xs text-gray-700 dark:text-gray-300 font-medium mt-1 text-center leading-tight">
               {tech.name}
             </span>
           </div>
         ))}
       </div>
-      <div className="flex flex-wrap justify-center gap-3 mt-8">
+
+      {/* Badges de expertise optimizados para móvil */}
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
         {t[language].expertise.map((b) => (
           <span
             key={b.key}
-            className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-sm font-medium shadow-sm border border-blue-100 dark:border-blue-800"
+            className="inline-flex items-center gap-1 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-medium shadow-sm border border-blue-100 dark:border-blue-800"
           >
-            <FaCheckCircle className="w-3 h-3 text-blue-400 dark:text-blue-400" />
-            {b.text}
+            <FaCheckCircle className="w-3 h-3 text-blue-400 dark:text-blue-400 flex-shrink-0" />
+            <span className="whitespace-nowrap">{b.text}</span>
           </span>
         ))}
       </div>
