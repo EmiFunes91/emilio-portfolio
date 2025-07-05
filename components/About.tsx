@@ -25,10 +25,10 @@ export default function About() {
       subtitle: "Fullstack Engineer specialized in scalable solutions and exceptional user experiences.",
       intro: (
         <>
-          I build robust and scalable digital products with <span className="font-semibold text-blue-700 dark:text-blue-400">FastAPI, Spring Boot and Next.js</span>. My approach combines clean architecture, implemented security (JWT, OAuth2) and optimized cloud deployments.
+          I build robust and scalable digital products with <span className="font-semibold text-blue-700 dark:text-blue-400">FastAPI, Spring Boot and Next.js</span>. My approach combines clean architecture, implemented security (JWT, OAuth2), and optimized cloud deployments.
         </>
       ),
-      highlight: "I have developed systems like Smart Advisor App (Legal SaaS with OpenAI) and advanced Stripe integrations, achieving complete and functional solutions for production.",
+      highlight: "I have developed systems like Smart Advisor App (Legal SaaS with OpenAI) and advanced Stripe integrations, delivering complete, production-ready solutions.",
       cta: "View projects",
       quote: "Technology is the bridge between ideas and real impact.",
     },
