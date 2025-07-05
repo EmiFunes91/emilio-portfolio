@@ -28,8 +28,18 @@ export default function ActionButton({ children, href, onClick, variant = "defau
 
   const styles = twMerge(base, variants[variant], className);
 
+  // Detectar si es un enlace interno (comienza con #)
+  const isInternalLink = href?.startsWith('#');
+
   return href ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={styles} title={title} style={style}>
+    <a 
+      href={href} 
+      target={isInternalLink ? undefined : "_blank"} 
+      rel={isInternalLink ? undefined : "noopener noreferrer"} 
+      className={styles} 
+      title={title} 
+      style={style}
+    >
       {children}
     </a>
   ) : (
