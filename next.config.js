@@ -4,8 +4,13 @@
 //   disable: true, // PWA desactivado hasta tener íconos listos
 // });
 
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
+  swcMinify: true,
+  experimental: {
+    modern: true,
+    optimizeImages: true,
+  },
   
   // Optimizaciones de imágenes
   images: {
@@ -13,5 +18,3 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
   },
 };
-
-module.exports = nextConfig;
