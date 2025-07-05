@@ -48,6 +48,9 @@ export default function ProjectCarousel({
     };
   }, [modalImg]);
 
+  const mobileSrc = normalizedImages[current].src.replace(/\.png$/, '-mobile.webp');
+  const isWebp = mobileSrc !== normalizedImages[current].src;
+
   return (
     <div className="relative overflow-hidden rounded-xl mb-4 group bg-white dark:bg-gray-900 transition-colors duration-300">
       <div
@@ -62,7 +65,7 @@ export default function ProjectCarousel({
           className="relative w-full h-full"
         >
           <Image
-            src={normalizedImages[current].src}
+            src={isWebp ? mobileSrc : normalizedImages[current].src}
             alt={
               normalizedImages[current].alt && normalizedImages[current].alt[language]
                 ? normalizedImages[current].alt[language]
@@ -79,8 +82,9 @@ export default function ProjectCarousel({
             className="object-cover object-top rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => setModalImg(normalizedImages[current].src)}
             onKeyDown={(e) => e.key === "Enter" && setModalImg(normalizedImages[current].src)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            sizes="(max-width: 480px) 340px, (max-width: 768px) 360px, (max-width: 1280px) 700px, 900px"
             priority={current === 0}
+            loading={current === 0 ? undefined : 'lazy'}
           />
         </motion.div>
 
