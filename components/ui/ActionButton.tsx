@@ -4,6 +4,12 @@
 import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
+// Utilidad para detectar móvil
+function isMobile() {
+  if (typeof navigator === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 type Props = {
   children: ReactNode;
   href?: string;
@@ -31,23 +37,21 @@ export default function ActionButton({ children, href, onClick, variant = "defau
   // Detectar si es un enlace interno (comienza con #)
   const isInternalLink = href?.startsWith('#');
 
-  // Función para manejar el scroll suave en enlaces internos
+  // Solución híbrida: solo usar scroll programático en móvil
   const handleInternalLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isInternalLink) {
+    if (isInternalLink && isMobile()) {
       e.preventDefault();
       const targetId = href!.substring(1);
       const targetElement = document.getElementById(targetId);
-      
       if (targetElement) {
-        // Calcular offset para considerar el navbar fijo
-        const navbarHeight = 80; // altura aproximada del navbar
+        const navbarHeight = 80;
         const targetPosition = targetElement.offsetTop - navbarHeight;
-        
-        // Usar scrollTo con behavior smooth para mejor compatibilidad móvil
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
         });
+        // Cambiar el hash manualmente para accesibilidad
+        window.location.hash = href!;
       }
     }
   };
