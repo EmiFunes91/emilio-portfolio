@@ -43,59 +43,59 @@ export default function ActionButton({ children, href, onClick, variant = "defau
 
   const styles = twMerge(base, variants[variant], className);
 
-  // Detectar si es un enlace interno (comienza con #)
-  const isInternalLink = href?.startsWith('#');
+  // Si no hay href, renderizar botón
+  if (!href) {
+    return (
+      <button onClick={onClick} className={styles} title={title} type={type} disabled={disabled} style={style}>
+        {children}
+      </button>
+    );
+  }
 
-  // Manejo programático para enlaces internos (más confiable en producción)
-  const handleInternalLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isInternalLink) {
+  // Si es enlace interno (comienza con #)
+  if (href.startsWith('#')) {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
-      const targetId = href!.substring(1);
+      console.log('ActionButton: Internal link clicked', href);
+      
+      const targetId = href.substring(1);
       const targetElement = document.getElementById(targetId);
       
       if (targetElement) {
-        // Calcular offset considerando el navbar fijo
-        const navbarHeight = 80;
-        const targetPosition = targetElement.offsetTop - navbarHeight;
-        
-        // Usar scrollTo con behavior smooth
-        window.scrollTo({
-          top: Math.max(0, targetPosition),
-          behavior: 'smooth'
+        console.log('ActionButton: Found target element, scrolling...');
+        targetElement.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
         });
-        
-        // Actualizar el hash para accesibilidad y navegación
-        window.history.pushState(null, '', href!);
+      } else {
+        console.error('ActionButton: Target element not found:', targetId);
       }
-    }
-  };
+    };
 
-  return href ? (
-    isInternalLink ? (
+    return (
       <a 
         href={href} 
         className={styles} 
         title={title} 
         style={style}
-        onClick={handleInternalLinkClick}
+        onClick={handleClick}
       >
         {children}
       </a>
-    ) : (
-      <a 
-        href={href} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={styles} 
-        title={title} 
-        style={style}
-      >
-        {children}
-      </a>
-    )
-  ) : (
-    <button onClick={onClick} className={styles} title={title} type={type} disabled={disabled} style={style}>
+    );
+  }
+
+  // Si es enlace externo
+  return (
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className={styles} 
+      title={title} 
+      style={style}
+    >
       {children}
-    </button>
+    </a>
   );
 }
