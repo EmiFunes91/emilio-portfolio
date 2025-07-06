@@ -256,6 +256,56 @@ export default function Testimonials() {
           </article>
         ))}
       </div>
+      
+      {/* CTA para plataformas freelance */}
+      <div className="mt-8 sm:mt-12 text-center">
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-gray-200/50 dark:border-gray-700/50 shadow-sm">
+          <h3 className="text-lg sm:text-xl font-medium text-gray-900 dark:text-gray-100 mb-4">
+            {language === 'es' ? 'Disponible para proyectos' : 'Available for projects'}
+          </h3>
+          
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <a
+              href="https://es.fiverr.com/emiliofunesdev?public_mode=true"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 hover:border-green-300 dark:hover:border-green-600 hover:shadow-md hover:-translate-y-0.5"
+            >
+              <Image 
+                src="/icons/fiverr.svg" 
+                alt="Fiverr" 
+                width={16} 
+                height={16} 
+                className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+              />
+              <span className="text-sm">Fiverr</span>
+              <svg className="w-3 h-3 text-gray-400 group-hover:text-green-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            
+            <a
+              href="https://www.upwork.com/freelancers/emiliof4?viewMode=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 hover:border-emerald-300 dark:hover:border-emerald-600 hover:shadow-md hover:-translate-y-0.5"
+            >
+              <Image 
+                src="/icons/upwork.svg" 
+                alt="Upwork" 
+                width={16} 
+                height={16} 
+                className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
+              />
+              <span className="text-sm">Upwork</span>
+              <svg className="w-3 h-3 text-gray-400 group-hover:text-emerald-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
       {/* Modal con carrusel */}
       {modalImg && (
         <div
