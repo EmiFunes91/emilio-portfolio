@@ -113,29 +113,27 @@ export default function Hero() {
               href="https://es.fiverr.com/emiliofunesdev?public_mode=true"
               target="_blank"
               rel="noopener noreferrer"
-              className="group hover:text-[#1dbf73] transition-all duration-300 hover:scale-110"
+              className="group text-gray-400 hover:text-[#1dbf73] transition-all duration-300 hover:scale-110"
               aria-label="Fiverr"
               title={language === 'es' ? 'Ver perfil en Fiverr' : 'View Fiverr profile'}
             >
-              <Image 
-                src="/icons/fiverr.svg" 
-                alt="Fiverr" 
-                width={24} 
-                height={24} 
-                className="w-6 h-6 transition-transform duration-300 group-hover:scale-110"
-              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" fill="none">
+                <circle cx="254.01" cy="254.01" r="254.01" fill="currentColor" className="transition-colors duration-300" />
+                <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
+                <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+              </svg>
             </a>
             <a
               href="https://www.upwork.com/freelancers/emiliof4?viewMode=1"
               target="_blank"
               rel="noopener noreferrer"
-              className="group hover:text-white dark:hover:text-white transition-all duration-300 hover:scale-110"
+              className="group text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300 hover:scale-110"
               aria-label="Upwork"
               title={language === 'es' ? 'Ver perfil en Upwork' : 'View Upwork profile'}
             >
               <svg className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 56.7 56.7" fill="currentColor">
                 <path d="M38.8,24.6c-2.8,0-3.7,2.7-3.9,4.3v0.1l-0.4,1.5c1.2,1,2.7,1.7,4.2,1.7c2,0,3.8-1.7,3.9-3.3C42.6,26.3,40.9,24.6,38.8,24.6z"/>
-                <path d="M28.9,3.7C15.2,3.7,4.1,14.8,4.1,28.5c0,13.7,11.1,24.8,24.8,24.8c13.7,0,24.8-11.1,24.8-24.8C53.7,14.8,42.6,3.7,28.9,3.7z M38.8,36.1c-2,0-3.7-0.6-5.2-1.5l-1.7,8H28l2.4-11c-1-1.4-2-3-2.7-4.5v1.7c0,4.1-3.3,7.4-7.3,7.4c-4,0-7.3-3.3-7.3-7.4v-10h3.8v10c0,2,1.6,3.6,3.6,3.6c2,0,3.6-1.6,3.6-3.6v-10h3.8c0.8,2.5,2.1,5.5,3.8,8.2c1-3.8,3.8-6.1,7.3-6.1c4.1,0,7.5,3.4,7.5,7.5C46.3,32.7,42.9,36.1,38.8,36.1z"/>
+                <path d="M28.9,3.7C15.2,3.7,4.1,14.8,4.1,28.5c0,13.7,11.1,24.8,24.8,24.8c13.7,0,24.8-11.1,24.8-24.8C53.7,14.8,42.6,3.7,28.9,3.7z M38.8,36.1c-2,0-3.7-0.6-5.2-1.5l-1.7,8H28l2.4-11c-1-1.4-2-3-2.7-4.5v1.7c0,4.1,3.3,7.4-7.3,7.4c-4,0-7.3-3.3-7.3-7.4v-10h3.8v10c0,2,1.6,3.6,3.6,3.6c2,0,3.6-1.6,3.6-3.6v-10h3.8c0.8,2.5,2.1,5.5,3.8,8.2c1-3.8,3.8-6.1,7.3-6.1c4.1,0,7.5,3.4,7.5,7.5C46.3,32.7,42.9,36.1,38.8,36.1z"/>
               </svg>
             </a>
           </div>
