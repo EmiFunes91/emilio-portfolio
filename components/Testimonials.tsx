@@ -213,7 +213,11 @@ export default function Testimonials() {
                     </span>
                   )}
                   <span className="text-xs text-gray-400 flex items-center gap-1">
-                    <Image src="/icons/fiverr.svg" alt="Fiverr" width={14} height={14} className="inline align-middle" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="14" height="14" className="inline align-middle" fill="none">
+                      <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
+                      <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
+                      <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+                    </svg>
                     {tLang.platform} · {testi.date}
                   </span>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">
@@ -271,13 +275,11 @@ export default function Testimonials() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 hover:border-green-300 dark:hover:border-green-600 hover:shadow-md hover:-translate-y-0.5"
             >
-              <Image 
-                src="/icons/fiverr.svg" 
-                alt="Fiverr" 
-                width={16} 
-                height={16} 
-                className="w-4 h-4 transition-transform duration-300 group-hover:scale-110"
-              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="16" height="16" className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" fill="none">
+                <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
+                <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
+                <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+              </svg>
               <span className="text-sm">Fiverr</span>
               <svg className="w-3 h-3 text-gray-400 group-hover:text-green-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

@@ -62,13 +62,13 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Fiverr"
-            className="group hover:text-[#1dbf73] transition-all duration-300 hover:scale-110"
+            className="group text-gray-400 hover:text-[#1dbf73] transition-all duration-300 hover:scale-110"
             title={language === 'es' ? 'Ver perfil en Fiverr' : 'View Fiverr profile'}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor">
-              <circle fill="#1dbf73" cx="254.01" cy="254.01" r="254.01"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" fill="none">
+              <circle cx="254.01" cy="254.01" r="254.01" fill="currentColor" className="transition-colors duration-300" />
               <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
-              <path fill="#fff" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+              <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
             </svg>
           </a>
           <a
@@ -76,7 +76,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Upwork"
-            className="group hover:text-white dark:hover:text-white transition-all duration-300 hover:scale-110"
+            className="group text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300 hover:scale-110"
             title={language === 'es' ? 'Ver perfil en Upwork' : 'View Upwork profile'}
           >
             <svg viewBox="0 0 56.7 56.7" className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor">
