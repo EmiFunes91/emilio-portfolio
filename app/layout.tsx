@@ -136,8 +136,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 antialiased min-h-screen">
+    <html lang="es" className="font-sans bg-white text-gray-900 antialiased min-h-screen">
       <head>
+        {/* Script para aplicar dark mode antes de cargar el CSS */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  try {
+    var theme = localStorage.getItem('portfolio-theme');
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {}
+})();
+            `,
+          }}
+        />
         {/* Estructura de datos JSON-LD */}
         <script
           type="application/ld+json"
