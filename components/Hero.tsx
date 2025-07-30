@@ -124,7 +124,7 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="https://www.upwork.com/freelancers/emiliof4?viewMode=1"
+              href="https://www.upwork.com/freelancers/emiliofunes"
               target="_blank"
               rel="noopener noreferrer"
               className="group text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300 hover:scale-110"
