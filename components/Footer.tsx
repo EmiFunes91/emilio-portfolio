@@ -72,11 +72,11 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.upwork.com/freelancers/emiliof4?viewMode=1"
+            href="https://www.upwork.com/freelancers/emiliofunes"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Upwork"
             className="group text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300 hover:scale-110"
+            aria-label="Upwork"
             title={language === 'es' ? 'Ver perfil en Upwork' : 'View Upwork profile'}
           >
             <svg viewBox="0 0 56.7 56.7" className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor">

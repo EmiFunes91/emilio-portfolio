@@ -3,6 +3,7 @@
 import { usePreferences } from "../context/PreferencesContext";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 // Estructura de testimonios para fácil escalabilidad
 const testimonials = [
@@ -16,9 +17,10 @@ const testimonials = [
     project: "Stripe Integration",
     projectIcon: "/icons/stripe.svg",
     image: "/images/testimonials/shantell.png",
+    serviceType: { es: "Stripe Payment Links para Agencia de Servicios Financieros", en: "Stripe Payment Links for a Financial Services Agency" },
     review: {
-      en: `I have done a few projects with Emilio, and I am always pleased with the results. What I appreciate most is his transparency, attention to detail, and the way he documents his work. I highly recommend his services.`,
-      es: `He realizado varios proyectos con Emilio y siempre quedo muy satisfecha con los resultados. Lo que más valoro es su transparencia, atención al detalle y la forma en que documenta su trabajo. Recomiendo altamente sus servicios.`
+      en: `Thank you so much for your help setting up Stripe! Your guidance was essential to fix the issue with the payment gateway. It's clear you know what you're doing, and your patience made all the difference. Highly recommended!`,
+      es: `¡Muchas gracias por tu ayuda configurando Stripe! Tu orientación fue esencial para solucionar el problema con la pasarela de pagos. Está claro que sabes lo que haces, y tu paciencia marcó toda la diferencia. ¡Altamente recomendado!`
     },
     related: "Stripe Integration",
     repeat: true,
@@ -30,12 +32,35 @@ const testimonials = [
       "/images/testimonials/review5-min.png"
     ]
   },
+  {
+    name: "Estefany",
+    country: "US",
+    countryLabel: { es: "Estados Unidos", en: "USA" },
+    platform: "Fiverr",
+    date: "Jul 2025",
+    rating: 5,
+    project: "Stripe Integration",
+    projectIcon: "/icons/stripe.svg",
+    image: "/images/testimonials-two/estefany.png",
+    serviceType: { es: "Stripe Payment Links para Agencia de Servicios Financieros", en: "Stripe Payment Links for a Financial Services Agency" },
+    review: {
+      en: `Emilio is an exceptional developer who delivered exactly what I needed. His communication was excellent throughout the project, and he went above and beyond to ensure everything worked perfectly. Highly recommended!`,
+      es: `Emilio es un desarrollador excepcional que entregó exactamente lo que necesitaba. Su comunicación fue excelente durante todo el proyecto y se esforzó más allá de lo esperado para asegurar que todo funcionara perfectamente. ¡Altamente recomendado!`
+    },
+    related: "Stripe Integration",
+    repeat: false,
+    screenshots: [
+      "/images/testimonials-two/review1-min.png",
+      "/images/testimonials-two/review2-min.png.png"
+    ]
+  },
 ];
 
 const countryFlags: Record<string, string> = {
   US: "/icons/us.svg",
   CA: "/icons/ca.svg",
   ES: "/icons/es.svg",
+  GB: "/icons/gb.svg",
 };
 
 function EliteStar({ filled }: { filled: boolean }) {
@@ -86,29 +111,36 @@ export default function Testimonials() {
   const [modalImg, setModalImg] = useState<string | null>(null);
   const [modalIdx, setModalIdx] = useState<number>(0);
   const [currentScreenshots, setCurrentScreenshots] = useState<string[]>([]);
+  const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
 
   const t = {
     es: {
       section: "Testimonios",
       subtitle: "Clientes reales, resultados reales.",
       badge: "Integración de Stripe",
+      webDevBadge: "Desarrollo Web",
       platform: "Fiverr",
       repeat: "Cliente recurrente",
       close: "Cerrar imagen",
       previous: "Imagen anterior",
       next: "Imagen siguiente",
       viewReview: "Ver reseña",
+      prevTestimonial: "Testimonio anterior",
+      nextTestimonial: "Siguiente testimonio",
     },
     en: {
       section: "Client Reviews",
       subtitle: "Real clients, real results.",
       badge: "Stripe Integration",
+      webDevBadge: "Web Development",
       platform: "Fiverr",
       repeat: "Repeat client",
       close: "Close image",
       previous: "Previous image",
       next: "Next image",
       viewReview: "View review",
+      prevTestimonial: "Previous testimonial",
+      nextTestimonial: "Next testimonial",
     },
   };
   const tLang = t[language];
@@ -141,6 +173,18 @@ export default function Testimonials() {
     }
   };
 
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const goToTestimonial = (index: number) => {
+    setCurrentTestimonial(index);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!modalImg) return;
@@ -163,102 +207,155 @@ export default function Testimonials() {
   }, [modalImg, modalIdx, currentScreenshots]);
 
   return (
-    <section id="testimonios" className="max-w-3xl mx-auto py-16 sm:py-20 px-4">
+    <section id="testimonios" className="max-w-4xl mx-auto py-16 sm:py-20 px-4">
       <h2 className="section-title text-center mb-2">{tLang.section}</h2>
       <h3 className="section-subtitle text-center mb-6 sm:mb-8">{tLang.subtitle}</h3>
-      <div className="flex flex-col items-center gap-6 sm:gap-8">
-        {testimonials.map((testi, i) => (
+      {/* Carrusel de Testimonios */}
+      <div className="relative max-w-4xl mx-auto">
+        {/* Testimonio Principal */}
+        <motion.div
+          key={currentTestimonial}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 p-6 sm:p-8 max-w-3xl mx-auto"
+        >
           <article
-            key={testi.name + i}
             itemScope
             itemType="https://schema.org/Review"
-            className="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-6 items-center border border-gray-100 dark:border-gray-800 w-full"
+            className="text-center"
           >
-            <div className="flex flex-col items-center sm:flex-row sm:items-start w-full gap-4 sm:gap-6">
-              <figure className="flex-shrink-0">
-                <Image
-                  src={testi.image}
-                  alt={`Photo of ${testi.name}`}
-                  width={100}
-                  height={100}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2 border-blue-200 dark:border-blue-700 shadow"
-                  itemProp="image"
-                  priority={i === 0}
-                />
-              </figure>
-              <div className="flex-1 min-w-0 w-full text-center sm:text-left">
-                <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-2 w-full">
-                  <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 min-w-0">
-                    <span className="font-semibold text-lg sm:text-xl md:text-2xl text-gray-900 dark:text-white truncate" itemProp="author">{testi.name}</span>
-                    <span className="flex items-center gap-1">
-                      <Image
-                        src={countryFlags[testi.country]}
-                        alt={typeof testi.countryLabel === 'string' ? testi.countryLabel : testi.countryLabel[language]}
-                        width={28}
-                        height={18}
-                        className="inline align-middle border border-gray-300 dark:border-gray-700 shadow-sm"
-                        style={{ borderRadius: 4 }}
-                      />
-                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 ml-1">{typeof testi.countryLabel === 'string' ? testi.countryLabel : testi.countryLabel[language]}</span>
+            {/* Header del Testimonio */}
+            <div className="flex items-center justify-between mb-0">
+              <div className="flex items-center gap-3">
+                <div className="flex items-baseline gap-3">
+                  <h3 className="font-semibold text-xl text-gray-900 dark:text-white leading-none" itemProp="author">
+                    {testimonials[currentTestimonial].name}
+                  </h3>
+                  <div className="flex items-center gap-1">
+                    <Image
+                      src={countryFlags[testimonials[currentTestimonial].country]}
+                      alt={typeof testimonials[currentTestimonial].countryLabel === 'string' ? testimonials[currentTestimonial].countryLabel : testimonials[currentTestimonial].countryLabel[language]}
+                      width={20}
+                      height={14}
+                      className="border border-gray-300 dark:border-gray-700 shadow-sm"
+                      style={{ borderRadius: 2 }}
+                    />
+                    <span className="text-sm text-gray-500 dark:text-gray-400 leading-none">
+                      {typeof testimonials[currentTestimonial].countryLabel === 'string' ? testimonials[currentTestimonial].countryLabel : testimonials[currentTestimonial].countryLabel[language]}
                     </span>
                   </div>
-                  <div className="flex items-center gap-1 sm:ml-auto" aria-label={`${testi.rating} stars`}>
-                    {[...Array(5)].map((_, j) => <EliteStar key={j} filled={j < testi.rating} />)}
-                  </div>
                 </div>
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3 sm:mt-2">
-                  {testi.repeat && (
-                    <span className="px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold border border-green-200 dark:border-green-700 animate-pulse">
-                      {tLang.repeat}
-                    </span>
-                  )}
-                  <span className="text-xs text-gray-400 flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="14" height="14" className="inline align-middle" fill="none">
-                      <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
-                      <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
-                      <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
-                    </svg>
-                    {tLang.platform} · {testi.date}
-                  </span>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">
-                    <Image src={testi.projectIcon} alt="Stripe" width={14} height={14} className="inline" />
-                    {tLang.badge}
-                  </span>
-                </div>
-                <blockquote className="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mt-4 text-center sm:text-left" itemProp="reviewBody">
-                  {testi.review[language]}
-                </blockquote>
-                <meta itemProp="itemReviewed" content={testi.related} />
-                <span itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                  <meta itemProp="ratingValue" content={String(testi.rating)} />
-                </span>
-                {/* Galería de capturas de reseñas */}
-                {testi.screenshots && testi.screenshots.length > 0 && (
-                  <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-4">
-                    {testi.screenshots.map((src, idx) => (
-                      <button
-                        key={src}
-                        type="button"
-                        onClick={() => openModal(testi.screenshots!, idx)}
-                        className="block rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-md hover:scale-105 hover:border-blue-200 dark:hover:border-blue-500 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-                        title={`${tLang.viewReview} ${idx + 1}`}
-                      >
-                        <Image
-                          src={src}
-                          alt={`${tLang.viewReview} ${idx + 1}`}
-                          width={80}
-                          height={54}
-                          className="object-cover w-[80px] h-[54px] sm:w-[90px] sm:h-[60px] bg-white dark:bg-gray-900"
-                          loading="lazy"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
+              </div>
+              
+              {/* Rating */}
+              <div className="flex items-center gap-1" aria-label={`${testimonials[currentTestimonial].rating} stars`}>
+                {[...Array(5)].map((_, j) => <EliteStar key={j} filled={j < testimonials[currentTestimonial].rating} />)}
               </div>
             </div>
+            
+            {/* Badges y Plataforma */}
+            <div className="flex flex-wrap items-center gap-1.5 mb-4 -mt-1">
+              {testimonials[currentTestimonial].repeat && (
+                <span className="px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold border border-green-200 dark:border-green-700 animate-pulse">
+                  {tLang.repeat}
+                </span>
+              )}
+              <span className="text-xs text-gray-400 flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="12" height="12" className="inline align-middle" fill="none">
+                  <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
+                  <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
+                  <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+                </svg>
+                {tLang.platform} · {testimonials[currentTestimonial].date}
+              </span>
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">
+                <Image src={testimonials[currentTestimonial].projectIcon} alt={testimonials[currentTestimonial].project} width={12} height={12} className="inline" />
+                {tLang.badge}
+              </span>
+            </div>
+            
+            {/* Contenido del Testimonio */}
+            <blockquote className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-3 italic" itemProp="reviewBody">
+              &ldquo;{testimonials[currentTestimonial].review[language]}&rdquo;
+            </blockquote>
+            
+            {testimonials[currentTestimonial].serviceType && (
+              <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-3">
+                {testimonials[currentTestimonial].serviceType[language]}
+              </p>
+            )}
+            
+            <meta itemProp="itemReviewed" content={testimonials[currentTestimonial].related} />
+            <span itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+              <meta itemProp="ratingValue" content={String(testimonials[currentTestimonial].rating)} />
+            </span>
+            
+            {/* Galería de capturas de reseñas */}
+            {testimonials[currentTestimonial].screenshots && testimonials[currentTestimonial].screenshots.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-2">
+                {testimonials[currentTestimonial].screenshots.map((src, idx) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => openModal(testimonials[currentTestimonial].screenshots!, idx)}
+                    className="block rounded-md border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-md hover:scale-105 hover:border-blue-200 dark:hover:border-blue-500 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                    title={`${tLang.viewReview} ${idx + 1}`}
+                  >
+                    <Image
+                      src={src}
+                      alt={`${tLang.viewReview} ${idx + 1}`}
+                      width={120}
+                      height={80}
+                      className="object-cover w-[120px] h-[80px] bg-white dark:bg-gray-900"
+                      loading="lazy"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </article>
-        ))}
+        </motion.div>
+        
+        {/* Navegación */}
+        <div className="flex items-center justify-center mt-6 gap-3">
+          <button
+            onClick={prevTestimonial}
+            aria-label={tLang.prevTestimonial}
+            className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 shadow-sm hover:shadow-md"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          {/* Indicadores */}
+          <div className="flex gap-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToTestimonial(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  index === currentTestimonial
+                    ? 'bg-blue-600 dark:bg-blue-400 scale-125'
+                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                }`}
+                aria-label={`Ir al testimonio ${index + 1}`}
+              />
+            ))}
+          </div>
+          
+          <button
+            onClick={nextTestimonial}
+            aria-label={tLang.nextTestimonial}
+            className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 shadow-sm hover:shadow-md"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
       
       {/* CTA para plataformas freelance */}
@@ -287,7 +384,7 @@ export default function Testimonials() {
             </a>
             
             <a
-              href="https://www.upwork.com/freelancers/emiliof4?viewMode=1"
+              href="https://www.upwork.com/freelancers/emiliofunes"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2.5 rounded-lg font-medium transition-all duration-300 hover:border-emerald-300 dark:hover:border-emerald-600 hover:shadow-md hover:-translate-y-0.5"
