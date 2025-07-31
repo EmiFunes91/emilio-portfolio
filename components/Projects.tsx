@@ -22,6 +22,10 @@ import {
   SiCodeigniter,
   SiMysql,
   SiJquery,
+  SiNodedotjs,
+  SiJavascript,
+  SiPuppeteer,
+  SiJson,
 } from "react-icons/si";
 import { motion } from "framer-motion";
 import { ExternalLink, Video, X, FileText } from "lucide-react";
@@ -29,6 +33,39 @@ import ProjectCarousel from "./ProjectCarousel";
 import ActionButton from "./ui/ActionButton";
 
 const projects = [
+  {
+    content: {
+      es: {
+        title: "OCT to XenForo Scraper & Migration",
+        badge: "Web Scraping & Migración",
+        description:
+          "Herramienta personalizada de web scraping y migración de datos para extraer posts del foro privado OffshoreCorpTalk e importarlos a una nueva plataforma XenForo.",
+      },
+      en: {
+        title: "OCT to XenForo Scraper & Migration",
+        badge: "Web Scraping & Migration",
+        description:
+          "Custom web scraping and data migration tool to extract posts from the private forum OffshoreCorpTalk and import them into a new XenForo-based platform.",
+      },
+    },
+    technologies: [
+      <SiNodedotjs key="node" />,
+      <SiJavascript key="js" />,
+      <SiPuppeteer key="puppeteer" />,
+      <SiMysql key="mysql" />,
+      <SiJson key="json" />,
+      <SiDocker key="bash" />,
+      <FaLock key="private" />,
+    ],
+    codeLink: "https://github.com/EmiFunes91/xenforo-data-migration-suite",
+    images: [
+      { src: "/projects/oct-to-xenforo-scraper-migration/1-OTC.png", alt: { es: "Interfaz de OffshoreCorpTalk - Foro privado objetivo", en: "OffshoreCorpTalk interface - Target private forum" } },
+      { src: "/projects/oct-to-xenforo-scraper-migration/2-scraping.png", alt: { es: "Proceso de scraping con Puppeteer y autenticación", en: "Scraping process with Puppeteer and authentication" } },
+      { src: "/projects/oct-to-xenforo-scraper-migration/3-processingg.png", alt: { es: "Procesamiento y limpieza de datos HTML", en: "HTML data processing and cleaning" } },
+      { src: "/projects/oct-to-xenforo-scraper-migration/4-scraping-succesed.png", alt: { es: "Migración exitosa a XenForo con 134 threads y 845 posts", en: "Successful migration to XenForo with 134 threads and 845 posts" } },
+    ],
+    youtubeLink: "https://www.youtube.com/watch?v=wgFxRXo7kgw",
+  },
   {
     content: {
       es: {
@@ -158,31 +195,6 @@ const projects = [
       "/projects/store-api/3.png",
     ],
     youtubeLink: "https://youtu.be/nTSNzoPEC7c",
-  },
-  {
-    content: {
-      es: {
-        title: "QuickTasks (App de Tareas)",
-        badge: "Fullstack en progreso",
-        description:
-          "Fullstack en desarrollo. Backend en Spring Boot con JWT. Frontend en React + Tailwind. Despliegue en GitHub Pages.",
-      },
-      en: {
-        title: "QuickTasks (Task App)",
-        badge: "Fullstack in progress",
-        description:
-          "Fullstack in development. Backend with Spring Boot + JWT, frontend with React + Tailwind. Hosted on GitHub Pages.",
-      },
-    },
-    technologies: [
-      <SiReact key="react" />,
-      <SiTailwindcss key="tailwind" />,
-      <SiSpring key="spring" />,
-      <SiDocker key="docker" />,
-      <FaLock key="jwt" />,
-    ],
-    codeLink: "https://github.com/EmiFunes91/QuickTasks",
-    images: ["/projects/quicktasks/1.png", "/projects/quicktasks/2.png"],
   },
   {
     content: {
