@@ -94,8 +94,8 @@ export default function ProjectCarousel({
     };
   }, [modalImg, modalIdx, normalizedImages.length]);
 
-  const mobileSrc = normalizedImages[current].src.replace(/\.png$/, '-mobile.webp');
-  const isWebp = mobileSrc !== normalizedImages[current].src;
+  const thumbnailSrc = normalizedImages[current].src.replace(/\.png$/, '-thumb.png');
+  const hasThumbnail = thumbnailSrc !== normalizedImages[current].src;
 
   const ModalContent = useMemo(() => {
     if (!modalImg) return null;
@@ -203,7 +203,7 @@ export default function ProjectCarousel({
             className="relative w-full h-full"
           >
             <Image
-              src={isWebp ? mobileSrc : normalizedImages[current].src}
+              src={hasThumbnail ? thumbnailSrc : normalizedImages[current].src}
               alt={
                 normalizedImages[current].alt && normalizedImages[current].alt[language]
                   ? normalizedImages[current].alt[language]
@@ -217,12 +217,13 @@ export default function ProjectCarousel({
                   ? normalizedImages[current].alt[language]
                   : title
               }
-              className="object-cover object-top rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="object-contain rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-800"
               onClick={() => openModal(current)}
               onKeyDown={(e) => e.key === "Enter" && openModal(current)}
               sizes="(max-width: 480px) 340px, (max-width: 768px) 360px, (max-width: 1280px) 700px, 900px"
               priority={current === 0}
               loading={current === 0 ? undefined : 'lazy'}
+              quality={90}
             />
           </motion.div>
 
