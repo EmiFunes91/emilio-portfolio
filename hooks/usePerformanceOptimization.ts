@@ -94,7 +94,11 @@ export function useLazyLoad<T>(
     setLoading(true)
     importFunc()
       .then((module) => {
-        setComponent(() => module.default)
+        if (module && module.default) {
+          setComponent(() => module.default)
+        } else {
+          console.error('Error loading component: module or module.default is null')
+        }
       })
       .catch((error) => {
         console.error('Error loading component:', error)

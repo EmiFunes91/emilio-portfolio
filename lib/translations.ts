@@ -24,6 +24,14 @@ export const translations = {
       testimonials: {
         title: "Testimonios",
       },
+      darkMode: {
+        light: "Cambiar a claro",
+        dark: "Cambiar a oscuro",
+      },
+      language: {
+        switchToEnglish: "Cambiar a Inglés",
+        switchToSpanish: "Cambiar a Español",
+      },
     },
     en: {
       hero: {
@@ -49,6 +57,14 @@ export const translations = {
       },
       testimonials: {
         title: "Testimonials",
+      },
+      darkMode: {
+        light: "Switch to light mode",
+        dark: "Switch to dark mode",
+      },
+      language: {
+        switchToEnglish: "Switch to English",
+        switchToSpanish: "Switch to Spanish",
       },
     },
   };

@@ -246,6 +246,7 @@ export default function Projects() {
       stripeDemo: "Demo de integración Stripe",
       gestionProDemo: "Demo del sistema de gestión",
       storeApiDemo: "Demo de API REST",
+      scraperDemo: "Demo de Web Scraping & Migración",
       cta: "Cada proyecto refleja mi compromiso con la calidad, la escalabilidad y las mejores prácticas de ingeniería.",
       count: (n: number) => `${n} proyectos publicados`,
     },
@@ -263,6 +264,7 @@ export default function Projects() {
       stripeDemo: "Stripe Integration Demo",
       gestionProDemo: "Management System Demo",
       storeApiDemo: "REST API Demo",
+      scraperDemo: "Web Scraping & Migration Demo",
       cta: "Each project demonstrates my commitment to quality, scalability, and modern engineering best practices.",
       count: (n: number) => `${n} projects published`,
     },
@@ -280,6 +282,8 @@ export default function Projects() {
       return tLang.gestionProDemo;
     } else if (projectTitle.includes("Store API")) {
       return tLang.storeApiDemo;
+    } else if (projectTitle.includes("OCT to XenForo")) {
+      return tLang.scraperDemo;
     } else {
       return tLang.youtube;
     }
