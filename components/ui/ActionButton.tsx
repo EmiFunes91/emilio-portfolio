@@ -61,14 +61,14 @@ export default function ActionButton({ children, href, onClick, variant = "defau
       const targetId = href.substring(1);
       const targetElement = document.getElementById(targetId);
       
-      if (targetElement) {
+      if (targetElement && typeof targetElement.scrollIntoView === 'function') {
         console.log('ActionButton: Found target element, scrolling...');
         targetElement.scrollIntoView({ 
           behavior: 'smooth',
           block: 'start'
         });
       } else {
-        console.error('ActionButton: Target element not found:', targetId);
+        console.error('ActionButton: Target element not found or scrollIntoView not available:', targetId);
       }
     };
 

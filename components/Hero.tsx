@@ -49,36 +49,36 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="flex flex-col items-center justify-center min-h-[70vh] text-center gap-6"
+      className="flex flex-col items-center justify-center min-h-[70vh] sm:min-h-[80vh] lg:min-h-[90vh] text-center gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8"
       >
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-2">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-2 sm:mb-4 leading-tight">
           {name}
         </h1>
-      <h2 className="mt-2 text-lg md:text-2xl font-semibold text-white tracking-tight">
+      <h2 className="mt-2 sm:mt-4 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-800 dark:text-gray-200 tracking-tight">
         {title}
       </h2>
-      <p className="text-base sm:text-lg text-gray-200 dark:text-gray-300 font-medium max-w-xl mx-auto mb-6">
+      <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 font-medium max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto mb-4 sm:mb-6 lg:mb-8 leading-relaxed">
         {t[language].cta}
         </p>
-      <div className="flex flex-wrap justify-center gap-4 mt-2">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mt-4 w-full max-w-sm sm:max-w-md">
         <ActionButton
           href="#proyectos"
           variant="demo"
           title={viewProjects}
-          className="px-6 py-3 text-base font-semibold shadow-lg"
+          className="group w-4/5 sm:w-auto px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium bg-blue-600/90 hover:bg-blue-600 text-white rounded-md shadow-sm hover:shadow-md transition-all duration-150 ease-out text-center flex items-center justify-center gap-1.5 sm:gap-2 border-0 backdrop-blur-sm"
           >
-          <FaFolderOpen className="w-5 h-5" />
+          <FaFolderOpen className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-150 group-hover:scale-110" />
           {viewProjects}
         </ActionButton>
         <ActionButton
             href={cvLink}
           variant="default"
           title={language === "es" ? "Descargar CV en español" : "Download CV in English"}
-          className="px-6 py-3 text-base font-semibold border-2 border-blue-600 text-blue-700 dark:text-blue-300 bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/30 shadow"
+          className="group w-4/5 sm:w-auto px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-medium bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200/60 dark:border-gray-600/60 hover:border-gray-300 dark:hover:border-gray-500 rounded-md shadow-sm hover:shadow-md transition-all duration-150 ease-out text-center flex items-center justify-center gap-1.5 sm:gap-2 backdrop-blur-sm"
           >
-          <FaDownload className="w-5 h-5" />
+          <FaDownload className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-150 group-hover:scale-110" />
           {downloadCV}
-          <Image src={flagSrc} alt={alt} width={20} height={20} className="ml-1 rounded shadow-sm" />
+          <Image src={flagSrc} alt={alt} width={14} height={10} className="rounded-sm shadow-sm transition-transform duration-150 group-hover:scale-110" />
         </ActionButton>
         </div>
 

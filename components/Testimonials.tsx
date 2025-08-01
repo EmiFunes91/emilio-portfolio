@@ -68,7 +68,7 @@ function EliteStar({ filled }: { filled: boolean }) {
     <svg
       aria-hidden="true"
       focusable="false"
-      className="w-5 h-5"
+      className="w-4 h-4 sm:w-5 sm:h-5"
       viewBox="0 0 20 20"
       fill={filled ? "url(#ultra-realistic-gold)" : "none"}
       stroke="#8B6914"
@@ -121,6 +121,7 @@ export default function Testimonials() {
       webDevBadge: "Desarrollo Web",
       platform: "Fiverr",
       repeat: "Cliente recurrente",
+      newClient: "Nuevo cliente",
       close: "Cerrar imagen",
       previous: "Imagen anterior",
       next: "Imagen siguiente",
@@ -135,6 +136,7 @@ export default function Testimonials() {
       webDevBadge: "Web Development",
       platform: "Fiverr",
       repeat: "Repeat client",
+      newClient: "New client",
       close: "Close image",
       previous: "Previous image",
       next: "Next image",
@@ -219,82 +221,81 @@ export default function Testimonials() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.5 }}
-          className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 p-6 sm:p-8 max-w-3xl mx-auto"
+          className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto"
         >
           <article
             itemScope
             itemType="https://schema.org/Review"
             className="text-center"
           >
-            {/* Header del Testimonio */}
-            <div className="flex items-center justify-between mb-0">
-              <div className="flex items-center gap-3">
-                <div className="flex items-baseline gap-3">
-                  <h3 className="font-semibold text-xl text-gray-900 dark:text-white leading-none" itemProp="author">
-                    {testimonials[currentTestimonial].name}
-                  </h3>
-                  <div className="flex items-center gap-1">
-                    <Image
-                      src={countryFlags[testimonials[currentTestimonial].country]}
-                      alt={typeof testimonials[currentTestimonial].countryLabel === 'string' ? testimonials[currentTestimonial].countryLabel : testimonials[currentTestimonial].countryLabel[language]}
-                      width={20}
-                      height={14}
-                      className="border border-gray-300 dark:border-gray-700 shadow-sm"
-                      style={{ borderRadius: 2 }}
-                    />
-                    <span className="text-sm text-gray-500 dark:text-gray-400 leading-none">
-                      {typeof testimonials[currentTestimonial].countryLabel === 'string' ? testimonials[currentTestimonial].countryLabel : testimonials[currentTestimonial].countryLabel[language]}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Rating */}
-              <div className="flex items-center gap-1" aria-label={`${testimonials[currentTestimonial].rating} stars`}>
-                {[...Array(5)].map((_, j) => <EliteStar key={j} filled={j < testimonials[currentTestimonial].rating} />)}
-              </div>
-            </div>
+                         {/* Header del Testimonio */}
+             <div className="flex flex-row items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5">
+                               <div className="flex flex-row items-center gap-1 sm:gap-2 lg:gap-1 flex-1">
+                 <span className="font-semibold text-lg sm:text-xl text-gray-900 dark:text-white leading-none text-center sm:text-left" itemProp="author">
+                   {testimonials[currentTestimonial].name}
+                 </span>
+                                   <Image
+                    src={countryFlags[testimonials[currentTestimonial].country]}
+                    alt={typeof testimonials[currentTestimonial].countryLabel === 'string' ? testimonials[currentTestimonial].countryLabel : testimonials[currentTestimonial].countryLabel[language]}
+                    width={16}
+                    height={12}
+                    className="rounded-sm shadow-sm sm:w-5 sm:h-4 ml-1 sm:ml-1 lg:ml-1"
+                  />
+                 <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-none ml-0.5 sm:ml-0 lg:ml-0">
+                   {typeof testimonials[currentTestimonial].countryLabel === 'string' ? testimonials[currentTestimonial].countryLabel : testimonials[currentTestimonial].countryLabel[language]}
+                 </span>
+               </div>
+               
+               {/* Rating */}
+               <div className="flex items-center justify-center sm:justify-end gap-1 flex-shrink-0" aria-label={`${testimonials[currentTestimonial].rating} stars`}>
+                 {[...Array(5)].map((_, j) => <EliteStar key={j} filled={j < testimonials[currentTestimonial].rating} />)}
+               </div>
+             </div>
+             
+                                         {/* Badges y Plataforma */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 mb-5 sm:mb-6">
+               {testimonials[currentTestimonial].repeat ? (
+                 <span className="px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold border border-green-200 dark:border-green-700 animate-pulse">
+                   {tLang.repeat}
+                 </span>
+                              ) : (
+                  <span className="px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold border border-blue-200 dark:border-blue-700 animate-pulse">
+                    {tLang.newClient}
+                  </span>
+                )}
+               <span className="text-xs text-gray-400 flex items-center gap-1">
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="12" height="12" className="inline align-middle" fill="none">
+                   <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
+                   <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
+                   <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+                 </svg>
+                 {tLang.platform} · {testimonials[currentTestimonial].date}
+               </span>
+               <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">
+                 <Image src={testimonials[currentTestimonial].projectIcon} alt={testimonials[currentTestimonial].project} width={12} height={12} className="inline" />
+                 {tLang.badge}
+               </span>
+             </div>
             
-            {/* Badges y Plataforma */}
-            <div className="flex flex-wrap items-center gap-1.5 mb-4 -mt-1">
-              {testimonials[currentTestimonial].repeat && (
-                <span className="px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold border border-green-200 dark:border-green-700 animate-pulse">
-                  {tLang.repeat}
-                </span>
-              )}
-              <span className="text-xs text-gray-400 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="12" height="12" className="inline align-middle" fill="none">
-                  <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
-                  <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
-                  <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
-                </svg>
-                {tLang.platform} · {testimonials[currentTestimonial].date}
-              </span>
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">
-                <Image src={testimonials[currentTestimonial].projectIcon} alt={testimonials[currentTestimonial].project} width={12} height={12} className="inline" />
-                {tLang.badge}
-              </span>
-            </div>
-            
-            {/* Contenido del Testimonio */}
-            <blockquote className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-3 italic" itemProp="reviewBody">
-              &ldquo;{testimonials[currentTestimonial].review[language]}&rdquo;
-            </blockquote>
-            
-            {testimonials[currentTestimonial].serviceType && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-3">
-                {testimonials[currentTestimonial].serviceType[language]}
-              </p>
-            )}
+                         {/* Contenido del Testimonio */}
+             <blockquote className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-4 sm:mb-5 italic" itemProp="reviewBody">
+               &ldquo;{testimonials[currentTestimonial].review[language]}&rdquo;
+             </blockquote>
+             
+             {testimonials[currentTestimonial].serviceType && (
+               <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic mb-5 sm:mb-6">
+                 {testimonials[currentTestimonial].serviceType[language]}
+               </p>
+             )}
             
             <meta itemProp="itemReviewed" content={testimonials[currentTestimonial].related} />
             <span itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
               <meta itemProp="ratingValue" content={String(testimonials[currentTestimonial].rating)} />
             </span>
             
-            {/* Galería de capturas de reseñas */}
-            {testimonials[currentTestimonial].screenshots && testimonials[currentTestimonial].screenshots.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-2">
+                         {/* Galería de capturas de reseñas */}
+             {testimonials[currentTestimonial].screenshots && testimonials[currentTestimonial].screenshots.length > 0 && (
+               <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4 sm:mt-5">
                 {testimonials[currentTestimonial].screenshots.map((src, idx) => (
                   <button
                     key={src}
@@ -306,9 +307,9 @@ export default function Testimonials() {
                     <Image
                       src={src}
                       alt={`${tLang.viewReview} ${idx + 1}`}
-                      width={120}
-                      height={80}
-                      className="object-cover w-[120px] h-[80px] bg-white dark:bg-gray-900"
+                      width={100}
+                      height={70}
+                      className="object-cover w-[100px] h-[70px] sm:w-[120px] sm:h-[80px] bg-white dark:bg-gray-900"
                       loading="lazy"
                     />
                   </button>

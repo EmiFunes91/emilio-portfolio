@@ -29,13 +29,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  @apply text-4xl sm:text-5xl md:text-6xl;
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
 }
 h2 {
-  @apply text-3xl sm:text-4xl md:text-5xl;
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
 }
 h3 {
-  @apply text-2xl sm:text-3xl;
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
 }
 
 p, ul, ol {
@@ -43,11 +43,24 @@ p, ul, ol {
 }
 
 section {
-  @apply py-20;
+  @apply py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32;
 }
 
 .max-w-main {
-  @apply max-w-4xl mx-auto;
+  @apply max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-4xl mx-auto;
+}
+
+/* Responsive utilities */
+.responsive-container {
+  @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12;
+}
+
+.responsive-text {
+  @apply text-sm sm:text-base md:text-lg lg:text-xl;
+}
+
+.responsive-heading {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
 }
 
 /* Inputs y elementos interactivos */
