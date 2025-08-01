@@ -14,11 +14,12 @@ export default function LanguageToggle() {
   return (
     <button
       onClick={toggleLanguage}
-      className="p-1.5 sm:p-2 px-2 sm:px-3 flex items-center gap-1 rounded-full border border-gray-400 hover:bg-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 transition-colors duration-200 text-xs sm:text-sm font-semibold"
+      className="p-1.5 sm:p-2 px-2 sm:px-3 flex items-center gap-1 rounded-full border border-gray-400 hover:bg-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 transition-all duration-100 ease-out hover:scale-105 active:scale-95 text-xs sm:text-sm font-semibold"
       title={tooltipText}
+      aria-label={tooltipText}
     >
-      <IoLanguage className="w-3 h-3 sm:w-4 sm:h-4" />
-      <span>{language.toUpperCase()}</span>
+      <IoLanguage className="w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-100 ease-out" />
+      <span className="transition-transform duration-100 ease-out">{language.toUpperCase()}</span>
     </button>
   );
 }
