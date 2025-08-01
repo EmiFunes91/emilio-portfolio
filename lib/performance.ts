@@ -96,10 +96,10 @@ export const performanceUtils = {
 
   // Measure performance
   measurePerformance(name: string, fn: () => void): void {
-    if (typeof window !== 'undefined' && 'performance' in window) {
-      const start = performance.now()
+    if (typeof window !== 'undefined' && window.performance && typeof window.performance.now === 'function') {
+      const start = window.performance.now()
       fn()
-      const end = performance.now()
+      const end = window.performance.now()
       console.log(`${name} took ${end - start}ms`)
     } else {
       fn()

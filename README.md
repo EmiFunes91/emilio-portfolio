@@ -1,167 +1,305 @@
 # Emilio Funes – Backend Developer Portfolio 🚀
 
-Este portfolio es una muestra profesional del trabajo y trayectoria de **Emilio Funes**, desarrollador backend especializado en el desarrollo de sistemas seguros, escalables y orientados a negocio utilizando **Java (Spring Boot)**, **PHP (Laravel)** y tecnologías modernas de frontend como **Next.js** y **Tailwind CSS**.
+A professional portfolio showcasing the work and expertise of **Emilio Funes**, a backend developer specialized in building secure, scalable, and business-oriented systems using **Java (Spring Boot)**, **PHP (Laravel)**, and modern frontend technologies like **Next.js** and **Tailwind CSS**.
 
-👉 [Ver demo en producción](https://emiliofunes-portfolio.vercel.app/)
-
----
-
-## 🧑‍💻 Sobre Mí
-
-Soy **Emilio Funes**, backend developer con una visión integral del desarrollo de software. Cuento con experiencia desarrollando:
-
-- APIs RESTful seguras y documentadas
-- Lógica de negocio con Java Spring Boot y Laravel
-- Autenticación y autorización (JWT, OAuth2)
-- Conexiones robustas a bases de datos PostgreSQL, MySQL y MongoDB
-- Aplicaciones de gestión, facturación, inventario, y más
-
-Mi enfoque se basa en la calidad del código, la escalabilidad del sistema y la comprensión profunda de los procesos del cliente.
+👉 [View live demo](https://emiliofunes-portfolio.vercel.app/)
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🧑‍💻 About Me
 
-| Tecnología         | Propósito                                     |
-|--------------------|-----------------------------------------------|
-| **Next.js**        | Framework React para SSR/SSG y optimización   |
-| **TypeScript**     | Tipado estático y mayor mantenibilidad        |
-| **Tailwind CSS**   | Estilos modernos, rápidos y responsive        |
-| **Vercel**         | Hosting serverless con CI/CD integrado        |
-| **Git & GitHub**   | Control de versiones y colaboración            |
-| **Jest & RTL**     | Testing unitario y de componentes             |
+I'm **Emilio Funes**, a backend developer with a comprehensive vision of software development. I have extensive experience in developing:
+
+- Secure and documented RESTful APIs
+- Business logic with Java Spring Boot and Laravel
+- Authentication and authorization systems (JWT, OAuth2)
+- Robust database connections with PostgreSQL, MySQL, and MongoDB
+- Management, billing, inventory, and enterprise applications
+
+My approach is based on code quality, system scalability, and deep understanding of client processes.
 
 ---
 
-## 📁 Estructura del Proyecto
+## 🛠️ Technology Stack
 
-```bash
-.
-├── app/                     # Rutas y páginas principales
-├── components/             # Componentes reutilizables
-├── __tests__/             # Tests unitarios y de integración
-├── context/               # Contextos de React
-├── hooks/                 # Custom hooks
-├── lib/                   # Utilidades y configuraciones
-├── public/                # Recursos estáticos
-├── styles/                # Archivos de estilos
-├── tailwind.config.ts     # Configuración de Tailwind
-├── jest.config.js         # Configuración de Jest
-├── tsconfig.json          # Configuración de TypeScript
-├── README.md              # Documentación del proyecto
-└── ...
+| Technology        | Purpose                                      |
+|-------------------|----------------------------------------------|
+| **Next.js 14**    | React framework for SSR/SSG and optimization |
+| **TypeScript**    | Static typing and enhanced maintainability   |
+| **Tailwind CSS**  | Modern, fast, and responsive styling         |
+| **Vercel**        | Serverless hosting with integrated CI/CD     |
+| **Git & GitHub**  | Version control and collaboration            |
+| **Jest & RTL**    | Unit and component testing                   |
+| **ESLint**        | Code quality and consistency                 |
+| **Prettier**      | Code formatting                              |
+
+---
+
+## 📁 Project Structure
+
+```
+emilio-portfolio-final/
+├── app/                     # Next.js app router pages and layouts
+│   ├── layout.tsx          # Root layout component
+│   ├── page.tsx            # Home page component
+│   ├── sitemap.ts          # Dynamic sitemap generation
+│   └── styles/             # Global styles
+├── components/             # Reusable React components
+│   ├── ui/                 # UI components (ActionButton, etc.)
+│   ├── navigation/         # Navigation components
+│   └── ...                 # Feature components
+├── __tests__/             # Test suites and test utilities
+│   ├── components/         # Component tests
+│   ├── hooks/             # Custom hooks tests
+│   ├── context/           # Context tests
+│   └── lib/               # Utility tests
+├── context/               # React contexts (PreferencesContext)
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utilities and configurations
+├── public/                # Static assets
+│   ├── images/            # Image assets
+│   ├── projects/          # Project images
+│   └── icons/             # Icon assets
+├── scripts/               # Build and optimization scripts
+├── coverage/              # Test coverage reports
+├── docs/                  # Project documentation
+├── jest.config.js         # Jest configuration
+├── tailwind.config.ts     # Tailwind CSS configuration
+├── tsconfig.json          # TypeScript configuration
+└── package.json           # Dependencies and scripts
 ```
 
 ---
 
-## 🧪 Instalación Local
+## 🚀 Quick Start
 
-1. Cloná el repositorio:
+### Prerequisites
 
-```bash
-git clone https://github.com/EmiFunes91/emilio-portfolio.git
-cd emilio-portfolio
-```
+- Node.js 18+ 
+- npm or yarn
+- Git
 
-2. Instalá las dependencias:
+### Installation
 
-```bash
-npm install
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/EmiFunes91/emilio-portfolio.git
+   cd emilio-portfolio
+   ```
 
-3. Iniciá el entorno de desarrollo:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-```
+3. **Start development server:**
+   ```bash
+   npm run dev
+   ```
 
-Abrí `http://localhost:3000` para ver el sitio en tu navegador.
+4. **Open your browser:**
+   Navigate to `http://localhost:3000` to view the application.
 
 ---
 
 ## 🧪 Testing
 
-El proyecto incluye una suite completa de tests unitarios y de integración:
+The project includes a comprehensive test suite with high coverage:
+
+### Running Tests
 
 ```bash
-# Ejecutar todos los tests
+# Run all tests
 npm test
 
-# Ejecutar tests en modo watch (desarrollo)
+# Run tests in watch mode (development)
 npm run test:watch
 
-# Ejecutar tests con cobertura
+# Run tests with coverage report
 npm run test:coverage
+
+# Run specific test files
+npm test -- --testPathPattern="ActionButton"
 ```
 
-### Cobertura de Tests
+### Test Coverage
 
-- ✅ **Componentes**: Hero, Stack, Projects, Contact
-- ✅ **Contextos**: PreferencesContext (idioma y tema)
-- ✅ **Utilidades**: SEO y structured data
-- ✅ **Integración**: Flujos principales de la aplicación
+Current coverage metrics:
+- **Statements**: 77.94%
+- **Branches**: 66.15%
+- **Functions**: 75.58%
+- **Lines**: 78.52%
 
-Ver más detalles en [`__tests__/README.md`](__tests__/README.md).
+### Test Structure
 
----
+- ✅ **Component Tests**: All UI components tested
+- ✅ **Hook Tests**: Custom hooks with full coverage
+- ✅ **Context Tests**: React context providers
+- ✅ **Integration Tests**: User flows and interactions
+- ✅ **Utility Tests**: Helper functions and utilities
 
-## 📦 Despliegue
-
-El sitio está desplegado automáticamente en **Vercel** cada vez que se hace un push al repositorio.
-
-🌍 Sitio en producción: [https://emilio-portfolio.vercel.app](https://emiliofunes-portfolio.vercel.app/)
-
----
-
-## 📌 Funcionalidades Clave
-
-- Diseño moderno, limpio y responsive
-- Sección de proyectos destacados
-- Botones de contacto directo (LinkedIn, email)
-- Compatible con modo claro/oscuro
-- Alternancia de idioma (ES/EN)
-- Completamente optimizado para rendimiento
-- **SEO avanzado** con metadatos dinámicos
-- **Tests unitarios** con cobertura del 70%
-- **Sitemap automático** y robots.txt optimizado
+For detailed testing information, see [`__tests__/README.md`](__tests__/README.md).
 
 ---
 
-## 🔍 SEO y Performance
+## 📦 Build & Deployment
 
-### Optimizaciones Implementadas
+### Development Build
 
-- ✅ **Metadatos dinámicos** basados en idioma
-- ✅ **Structured Data** (JSON-LD) para mejor indexación
-- ✅ **Open Graph** y **Twitter Cards** optimizadas
-- ✅ **Sitemap.xml** automático
-- ✅ **robots.txt** configurado
-- ✅ **Hreflang** para multi-idioma
-- ✅ **Google Analytics** integrado
+```bash
+# Build for development
+npm run build
 
-### Métricas de Performance
+# Start production server locally
+npm start
+```
 
-- 🚀 **Lighthouse Score**: 95+ en todas las categorías
-- 📱 **Mobile First**: Diseño responsive optimizado
-- ⚡ **Core Web Vitals**: Optimizado para LCP, FID, CLS
+### Production Deployment
+
+The application is automatically deployed to **Vercel** on every push to the main branch.
+
+🌍 **Live Site**: [https://emiliofunes-portfolio.vercel.app](https://emiliofunes-portfolio.vercel.app/)
+
+### Environment Variables
+
+Create a `.env.local` file for local development:
+
+```env
+NEXT_PUBLIC_GA_ID=your-google-analytics-id
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
 ---
 
-## 📫 Contacto
+## 🎨 Key Features
 
-Si te interesa colaborar o estás buscando un desarrollador backend comprometido y profesional:
+### User Experience
+- **Modern Design**: Clean, professional interface
+- **Responsive Layout**: Optimized for all devices
+- **Dark/Light Mode**: Theme switching capability
+- **Multi-language**: English/Spanish support
+- **Smooth Animations**: Enhanced user interactions
+
+### Performance
+- **SEO Optimized**: Advanced metadata and structured data
+- **Core Web Vitals**: Optimized for LCP, FID, CLS
+- **Image Optimization**: Next.js Image component
+- **Code Splitting**: Automatic bundle optimization
+- **Caching**: Efficient resource caching
+
+### Developer Experience
+- **TypeScript**: Full type safety
+- **ESLint**: Code quality enforcement
+- **Prettier**: Consistent code formatting
+- **Husky**: Git hooks for quality assurance
+- **Comprehensive Testing**: High test coverage
+
+---
+
+## 🔍 SEO & Performance
+
+### SEO Implementation
+
+- ✅ **Dynamic Metadata**: Language-based meta tags
+- ✅ **Structured Data**: JSON-LD for better indexing
+- ✅ **Open Graph**: Social media optimization
+- ✅ **Twitter Cards**: Twitter sharing optimization
+- ✅ **Sitemap**: Automatic XML sitemap generation
+- ✅ **Robots.txt**: Search engine directives
+- ✅ **Hreflang**: Multi-language SEO support
+
+### Performance Metrics
+
+- 🚀 **Lighthouse Score**: 95+ across all categories
+- 📱 **Mobile First**: Responsive design optimization
+- ⚡ **Core Web Vitals**: Optimized for performance
+- 🎯 **Accessibility**: WCAG 2.1 AA compliance
+
+---
+
+## 🛠️ Development
+
+### Available Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+
+# Testing
+npm test             # Run all tests
+npm run test:watch   # Run tests in watch mode
+npm run test:coverage # Run tests with coverage
+
+# Optimization
+npm run analyze      # Analyze bundle size
+npm run optimize     # Optimize images and assets
+```
+
+### Code Quality
+
+The project follows strict code quality standards:
+
+- **TypeScript**: Strict type checking enabled
+- **ESLint**: Comprehensive linting rules
+- **Prettier**: Consistent code formatting
+- **Husky**: Pre-commit hooks for quality assurance
+
+---
+
+## 📚 Documentation
+
+- [`docs/PERFORMANCE.md`](docs/PERFORMANCE.md) - Performance optimization guide
+- [`docs/TEST_COVERAGE.md`](docs/TEST_COVERAGE.md) - Testing strategy and coverage
+- [`__tests__/README.md`](__tests__/README.md) - Testing documentation
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow TypeScript best practices
+- Write tests for new features
+- Maintain test coverage above 70%
+- Follow the existing code style
+- Update documentation as needed
+
+---
+
+## 📫 Contact
+
+Interested in collaboration or looking for a committed and professional backend developer?
 
 - 🔗 [LinkedIn](https://www.linkedin.com/in/emilio-funes-8b140b21a/)
 - 📧 emilio.ifunes@hotmail.es
-- 🌐 [Portfolio Web](https://emiliofunes-portfolio.vercel.app/)
+- 🌐 [Portfolio Website](https://emiliofunes-portfolio.vercel.app/)
 
 ---
 
-## 📝 Licencia
+## 📝 License
 
-Este proyecto está licenciado bajo los términos de la **MIT License**.  
-© 2025 Emilio Funes.
+This project is licensed under the **MIT License**.  
+© 2025 Emilio Funes. All rights reserved.
 
 ---
 
-> Si te gustó este portfolio, no dudes en dejar una ⭐ en el repositorio o contactarme. ¡Gracias por visitarlo!
+## 🙏 Acknowledgments
+
+- **Next.js Team** for the amazing framework
+- **Vercel** for seamless deployment
+- **Tailwind CSS** for the utility-first CSS framework
+- **Testing Library** for excellent testing utilities
+
+---
+
+> If you like this portfolio, feel free to ⭐ the repository or reach out. Thank you for visiting!

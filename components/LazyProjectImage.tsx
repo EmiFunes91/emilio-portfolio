@@ -26,6 +26,13 @@ export default function LazyProjectImage({
   useEffect(() => {
     if (priority) return // No lazy load para imágenes prioritarias
 
+    // Verificar si IntersectionObserver está disponible
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      // Fallback: cargar la imagen inmediatamente si IntersectionObserver no está disponible
+      setIsInView(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

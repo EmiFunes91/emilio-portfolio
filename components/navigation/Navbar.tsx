@@ -55,67 +55,71 @@ export default function Navbar() {
       }`}
       aria-label="Main navigation"
     >
-      <div className="w-full max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
         <Link
           href="/"
-          className="text-xl font-bold flex items-center gap-2 text-blue-600 dark:text-blue-400"
+          className="text-lg sm:text-xl font-bold flex items-center gap-2 text-blue-600 dark:text-blue-400"
           aria-label="Go to homepage"
         >
-          <FaCode className="w-5 h-5" />
+          <FaCode className="w-4 h-4 sm:w-5 sm:h-5" />
           <span className="tracking-wider">Portfolio</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6">
           {navLinks.map(link => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="flex items-center gap-2 text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition"
+              className="flex items-center gap-1.5 sm:gap-2 text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
             >
               {link.icon}
-              <span>{link.label}</span>
+              <span className="hidden xl:inline">{link.label}</span>
             </a>
           ))}
-          <DarkModeToggle />
-          <LanguageToggle />
+          <div className="flex items-center gap-2 ml-2">
+            <DarkModeToggle />
+            <LanguageToggle />
+          </div>
         </div>
 
-        <div className="md:hidden flex items-center gap-2">
-          <DarkModeToggle />
-          <LanguageToggle />
+        <div className="lg:hidden flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <DarkModeToggle />
+            <LanguageToggle />
+          </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
-            className="text-gray-800 dark:text-gray-100"
+            className="text-gray-800 dark:text-gray-100 p-1 ml-1"
           >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {menuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
         </div>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden px-6 pb-4 space-y-3"
-          >
-            {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleLinkClick(e, link.href)}
-                className="flex items-center gap-2 text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition"
-              >
-                {link.icon}
-                <span>{link.label}</span>
-              </a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+             <AnimatePresence>
+         {menuOpen && (
+           <motion.div
+             initial={{ opacity: 0, y: -10 }}
+             animate={{ opacity: 1, y: 0 }}
+             exit={{ opacity: 0, y: -10 }}
+             className="lg:hidden px-4 sm:px-6 pb-4 space-y-2 sm:space-y-3 border-t border-gray-200 dark:border-gray-700"
+           >
+             {navLinks.map(link => (
+               <a
+                 key={link.href}
+                 href={link.href}
+                 onClick={(e) => handleLinkClick(e, link.href)}
+                 className="flex items-center gap-2 text-sm font-medium text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 py-2"
+               >
+                 {link.icon}
+                 <span>{link.label}</span>
+               </a>
+             ))}
+           </motion.div>
+         )}
+       </AnimatePresence>
     </motion.nav>
   );
 }
