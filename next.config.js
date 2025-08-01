@@ -7,10 +7,6 @@
 module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    modern: true,
-    optimizeImages: true,
-  },
   
   // Optimizaciones de imágenes
   images: {
