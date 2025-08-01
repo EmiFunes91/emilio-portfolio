@@ -7,9 +7,27 @@
 @import '@fontsource/inter/latin.css';
 
 
-/* Suavizar cambios entre modos claro/oscuro */
+/* Optimized theme transitions */
 * {
-  @apply transition-colors duration-300;
+  transition: color 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
+}
+
+/* Faster transitions for interactive elements */
+button, a, input, textarea, select {
+  transition: all 100ms ease-out;
+}
+
+/* Smooth transitions for theme-specific elements */
+.theme-bg-transition {
+  transition: background-color 200ms ease-out;
+}
+
+.theme-text-transition {
+  transition: color 200ms ease-out;
+}
+
+.theme-border-transition {
+  transition: border-color 200ms ease-out;
 }
 
 html {
@@ -96,6 +114,29 @@ html:not(.dark) select {
 /* Utilidades personalizadas */
 .nav-link-active {
   @apply text-blue-600 dark:text-blue-400 font-semibold;
+}
+
+/* Performance optimizations */
+* {
+  /* Optimize for animations */
+  will-change: auto;
+}
+
+/* Optimize theme transitions for specific elements */
+.theme-transition {
+  @apply transition-colors duration-200 ease-out;
+}
+
+/* Disable transitions during initial load to prevent flash */
+.no-transition {
+  @apply transition-none;
+}
+
+/* Optimize for GPU acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -2,7 +2,7 @@
 
 import { usePreferences } from "../context/PreferencesContext";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
 // Estructura de testimonios para fácil escalabilidad
@@ -153,27 +153,27 @@ export default function Testimonials() {
     setModalIdx(index);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalImg(null);
     setModalIdx(0);
     setCurrentScreenshots([]);
-  };
+  }, []);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     if (currentScreenshots.length > 0) {
       const newIndex = modalIdx === 0 ? currentScreenshots.length - 1 : modalIdx - 1;
       setModalIdx(newIndex);
       setModalImg(currentScreenshots[newIndex]);
     }
-  };
+  }, [currentScreenshots, modalIdx]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (currentScreenshots.length > 0) {
       const newIndex = modalIdx === currentScreenshots.length - 1 ? 0 : modalIdx + 1;
       setModalIdx(newIndex);
       setModalImg(currentScreenshots[newIndex]);
     }
-  };
+  }, [currentScreenshots, modalIdx]);
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -206,7 +206,7 @@ export default function Testimonials() {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [modalImg, modalIdx, currentScreenshots]);
+  }, [modalImg, goToPrevious, goToNext, closeModal]);
 
   return (
     <section id="testimonios" className="max-w-4xl mx-auto py-16 sm:py-20 px-4">
@@ -253,25 +253,27 @@ export default function Testimonials() {
              </div>
              
                                          {/* Badges y Plataforma */}
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 mb-5 sm:mb-6">
-               {testimonials[currentTestimonial].repeat ? (
-                 <span className="px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold border border-green-200 dark:border-green-700 animate-pulse">
-                   {tLang.repeat}
+              <div className="flex flex-col xs:flex-row items-center justify-center sm:justify-start gap-2 mb-5 sm:mb-6">
+               <div className="flex items-center gap-1.5">
+                 {testimonials[currentTestimonial].repeat ? (
+                   <span className="px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-semibold border border-green-200 dark:border-green-700 animate-pulse whitespace-nowrap">
+                     {tLang.repeat}
+                   </span>
+                                ) : (
+                   <span className="px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold border border-blue-200 dark:border-blue-700 animate-pulse whitespace-nowrap">
+                     {tLang.newClient}
+                   </span>
+                 )}
+                 <span className="text-xs text-gray-400 flex items-center gap-1 whitespace-nowrap">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="12" height="12" className="inline align-middle" fill="none">
+                     <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
+                     <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
+                     <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
+                   </svg>
+                   {tLang.platform} · {testimonials[currentTestimonial].date}
                  </span>
-                              ) : (
-                  <span className="px-1.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold border border-blue-200 dark:border-blue-700 animate-pulse">
-                    {tLang.newClient}
-                  </span>
-                )}
-               <span className="text-xs text-gray-400 flex items-center gap-1">
-                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width="12" height="12" className="inline align-middle" fill="none">
-                   <circle cx="254.01" cy="254.01" r="254.01" fill="#1dbf73" />
-                   <circle fill="#fff" cx="315.97" cy="162.19" r="26.87"/>
-                   <path fill="#111" d="M345.87,207.66h-123V199.6c0-15.83,15.83-16.13,23.89-16.13,9.25,0,13.44.9,13.44.9v-43.6a155.21,155.21,0,0,0-19.71-1.19c-25.68,0-73.16,7.16-73.16,61.51V208h-22.4v40.31h22.4v85.1h-20.9v40.31H247.34V333.37H222.85v-85.1H290v85.1H269.13v40.31h97.65V333.37H345.87Z" transform="translate(-1.83 -0.98)"/>
-                 </svg>
-                 {tLang.platform} · {testimonials[currentTestimonial].date}
-               </span>
-               <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">
+               </div>
+               <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium whitespace-nowrap">
                  <Image src={testimonials[currentTestimonial].projectIcon} alt={testimonials[currentTestimonial].project} width={12} height={12} className="inline" />
                  {tLang.badge}
                </span>
