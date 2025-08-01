@@ -15,14 +15,14 @@ describe('LanguageToggle Component', () => {
   it('renders the language toggle button', () => {
     renderWithContext(<LanguageToggle />)
     
-    const button = screen.getByRole('button', { name: /es/i })
+    const button = screen.getByRole('button', { name: /cambiar a inglés/i })
     expect(button).toBeInTheDocument()
   })
 
   it('handles click event', () => {
     renderWithContext(<LanguageToggle />)
     
-    const button = screen.getByRole('button', { name: /es/i })
+    const button = screen.getByRole('button', { name: /cambiar a inglés/i })
     fireEvent.click(button)
     
     // Verificar que el botón sigue presente después del click
@@ -32,7 +32,7 @@ describe('LanguageToggle Component', () => {
   it('renders with correct styling classes', () => {
     renderWithContext(<LanguageToggle />)
     
-    const button = screen.getByRole('button', { name: /es/i })
+    const button = screen.getByRole('button', { name: /cambiar a inglés/i })
     expect(button).toHaveClass('rounded-full')
     expect(button).toHaveClass('p-1.5', 'sm:p-2')
     expect(button).toHaveClass('px-2', 'sm:px-3')
@@ -41,7 +41,7 @@ describe('LanguageToggle Component', () => {
   it('renders language icon', () => {
     renderWithContext(<LanguageToggle />)
     
-    const button = screen.getByRole('button', { name: /es/i })
+    const button = screen.getByRole('button', { name: /cambiar a inglés/i })
     expect(button).toBeInTheDocument()
   })
 
