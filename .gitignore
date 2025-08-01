@@ -8,3 +8,10 @@ out/
 .cache/
 *.local
 
+# Coverage reports
+coverage/
+coverage-improvement-report.md
+
+# Development scripts
+scripts/
+
