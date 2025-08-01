@@ -2,7 +2,7 @@
 
 import { usePreferences } from "../context/PreferencesContext";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
 // Estructura de testimonios para fácil escalabilidad
@@ -153,27 +153,27 @@ export default function Testimonials() {
     setModalIdx(index);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModalImg(null);
     setModalIdx(0);
     setCurrentScreenshots([]);
-  };
+  }, []);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     if (currentScreenshots.length > 0) {
       const newIndex = modalIdx === 0 ? currentScreenshots.length - 1 : modalIdx - 1;
       setModalIdx(newIndex);
       setModalImg(currentScreenshots[newIndex]);
     }
-  };
+  }, [currentScreenshots, modalIdx]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (currentScreenshots.length > 0) {
       const newIndex = modalIdx === currentScreenshots.length - 1 ? 0 : modalIdx + 1;
       setModalIdx(newIndex);
       setModalImg(currentScreenshots[newIndex]);
     }
-  };
+  }, [currentScreenshots, modalIdx]);
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -206,7 +206,7 @@ export default function Testimonials() {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [modalImg, modalIdx, currentScreenshots]);
+  }, [modalImg, goToPrevious, goToNext, closeModal]);
 
   return (
     <section id="testimonios" className="max-w-4xl mx-auto py-16 sm:py-20 px-4">
