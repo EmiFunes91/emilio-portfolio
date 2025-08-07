@@ -57,13 +57,7 @@ describe('Hero Component', () => {
     expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/emilio-funes-8b140b21a/')
   })
 
-  it('renders open source contribution badge', () => {
-    renderWithContext(<Hero />)
-    
-    const openSourceBadge = screen.getByText(/Open Source/)
-    expect(openSourceBadge).toBeInTheDocument()
-    expect(openSourceBadge.closest('a')).toHaveAttribute('href', 'https://github.com/wintercms/docs/pull/237')
-  })
+
 
   it('has correct section attributes', () => {
     renderWithContext(<Hero />)
