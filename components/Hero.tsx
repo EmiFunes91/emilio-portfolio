@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail, FileText } from "lucide-react";
-import { FaGithub, FaLinkedin, FaSnowflake, FaFolderOpen, FaDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFolderOpen, FaDownload } from "react-icons/fa";
 import type { IconBaseProps } from "react-icons";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -10,7 +10,6 @@ import ActionButton from "./ui/ActionButton";
 
 const GithubIcon: React.ComponentType<IconBaseProps> = FaGithub;
 const LinkedInIcon: React.ComponentType<IconBaseProps> = FaLinkedin;
-const SnowflakeIcon: React.ComponentType<IconBaseProps> = FaSnowflake;
 
 export default function Hero() {
   const { language } = usePreferences();
@@ -26,7 +25,7 @@ export default function Hero() {
       alt: "Bandera de España",
       viewProjects: "Ver proyectos",
       downloadCV: "Descargar CV",
-      openSourceContribution: "Contribución a Winter CMS (Canadá)"
+
     },
     en: {
       name: "Emilio Funes",
@@ -38,11 +37,11 @@ export default function Hero() {
       alt: "UK Flag",
       viewProjects: "View projects",
       downloadCV: "Download CV",
-      openSourceContribution: "Winter CMS Contribution (Canada)"
+
     },
   };
 
-  const { name, title, role, contact, cvLabel, alt, viewProjects, downloadCV, openSourceContribution } = t[language];
+  const { name, title, role, contact, cvLabel, alt, viewProjects, downloadCV } = t[language];
   const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes-CV-${language}.pdf`;
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
@@ -137,27 +136,6 @@ export default function Hero() {
               </svg>
             </a>
           </div>
-          <a
-            href="https://github.com/wintercms/docs/pull/237"
-            target="_blank"
-            rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-sm font-medium shadow-sm border border-blue-100 dark:border-blue-800 animate-pulse hover:animate-none"
-            title={openSourceContribution}
-          >
-            <GithubIcon className="w-4 h-4" />
-            <span className="inline-flex items-center gap-1">
-              Open Source •
-              <SnowflakeIcon className="w-4 h-4 -mt-0.5" />
-              Winter CMS
-              <Image
-                src="/icons/ca.svg"
-                alt="Bandera de Canadá"
-                width={16}
-                height={12}
-                className="ml-1"
-              />
-            </span>
-          </a>
       </motion.div>
     </section>
   );
