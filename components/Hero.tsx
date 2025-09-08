@@ -42,7 +42,7 @@ export default function Hero() {
   };
 
   const { name, title, role, contact, cvLabel, alt, viewProjects, downloadCV } = t[language];
-  const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes-CV-${language}.pdf`;
+  const cvLink = `https://emifunes91.github.io/emiliofunes-cv/${language}/EmilioFunes_CV_${language.toUpperCase()}.pdf`;
   const flagSrc = language === "es" ? "/icons/es.svg" : "/icons/gb.svg";
 
   return (
