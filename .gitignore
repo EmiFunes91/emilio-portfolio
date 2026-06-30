@@ -1,17 +1,2 @@
-node_modules/
-.next/
-dist/
-out/
-.env
-.DS_Store
-*.log
-.cache/
-*.local
-
-# Coverage reports
-coverage/
-coverage-improvement-report.md
-
-# Development scripts
-scripts/
-
+.env.local
+.next
