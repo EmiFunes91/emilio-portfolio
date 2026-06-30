@@ -1,13 +1,3 @@
-import "./styles/globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import ScrollReset from "../components/ScrollReset";
-import { PreferencesProvider } from "../context/PreferencesContext";
-import { Analytics } from "@vercel/analytics/react";
-import Script from "next/script";
-import Image from "next/image";
-import ResourcePreloader from "../components/ResourcePreloader";
-
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
