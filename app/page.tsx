@@ -11,6 +11,7 @@ import Testimonials from "../components/Testimonials";
 import Footer from "../components/Footer";
 import FadeInSection from "../components/FadeInSection";
 import ScrollToTop from "../components/ScrollToTop";
+import SEOHead from "../components/SEOHead";
 
 export default function HomePage() {
   const { language } = usePreferences();
@@ -32,14 +33,15 @@ export default function HomePage() {
 
   return (
     <>
+      <SEOHead />
       <Navbar />
-      <main className="min-h-screen pt-20 px-4 sm:px-6 md:px-10 font-sans bg-white text-gray-900 dark:bg-gray-950 dark:text-white transition-colors duration-300">
+      <main className="min-h-screen pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 xl:px-12 font-sans bg-white text-gray-900 dark:bg-gray-950 dark:text-white transition-colors duration-300">
         <FadeInSection>
           <Hero />
         </FadeInSection>
 
         <FadeInSection>
-          <About title={tLang.about} text={tLang.aboutText} />
+          <About />
         </FadeInSection>
 
         <FadeInSection>

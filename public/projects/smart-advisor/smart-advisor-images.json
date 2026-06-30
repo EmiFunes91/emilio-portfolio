@@ -1,0 +1,51 @@
+[
+  {
+    "src": "/projects/smart-advisor/login.webp",
+    "alt": {
+      "es": "Pantalla de login de Smart Advisor App – SaaS legal con IA",
+      "en": "Login screen of Smart Advisor App – Legal AI SaaS"
+    }
+  },
+  {
+    "src": "/projects/smart-advisor/register.webp",
+    "alt": {
+      "es": "Registro profesional en Smart Advisor App",
+      "en": "Professional registration in Smart Advisor App"
+    }
+  },
+  {
+    "src": "/projects/smart-advisor/pricing.webp",
+    "alt": {
+      "es": "Planes y precios de suscripción en Smart Advisor",
+      "en": "Subscription plans and pricing in Smart Advisor"
+    }
+  },
+  {
+    "src": "/projects/smart-advisor/dashboard.webp",
+    "alt": {
+      "es": "Dashboard principal de Smart Advisor App",
+      "en": "Main dashboard of Smart Advisor App"
+    }
+  },
+  {
+    "src": "/projects/smart-advisor/faq.webp",
+    "alt": {
+      "es": "Sección de preguntas frecuentes en Smart Advisor",
+      "en": "FAQ section in Smart Advisor"
+    }
+  },
+  {
+    "src": "/projects/smart-advisor/documents.webp",
+    "alt": {
+      "es": "Gestión de documentos legales en Smart Advisor",
+      "en": "Legal documents management in Smart Advisor"
+    }
+  },
+  {
+    "src": "/projects/smart-advisor/jurisprudence.webp",
+    "alt": {
+      "es": "Análisis de jurisprudencia en Smart Advisor",
+      "en": "Jurisprudence analysis in Smart Advisor"
+    }
+  }
+]

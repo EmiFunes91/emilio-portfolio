@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://emiliofunes-portfolio.vercel.app/sitemap.xml
+
+# Crawl-delay para ser respetuoso con el servidor
+Crawl-delay: 1
+
+# Permitir acceso a recursos estáticos
+Allow: /icons/
+Allow: /images/
+Allow: /projects/
+Allow: /manifest.json
+
+# Bloquear archivos de configuración y desarrollo
+Disallow: /.next/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /emilio-portfolio.git/ 

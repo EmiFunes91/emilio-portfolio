@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    reactStrictMode: true,
-    images: {
-      // No es necesario configurar domains si usás imágenes locales
-    },
-  };
+// const withPWA = require('next-pwa')({
+//   dest: 'public',
+//   disable: true, // PWA desactivado hasta tener íconos listos
+// });
+
+module.exports = {
+  reactStrictMode: true,
+  swcMinify: true,
   
-  module.exports = nextConfig;
-  
+  // Optimizaciones de imágenes
+  images: {
+    formats: ['image/webp'],
+    dangerouslyAllowSVG: true,
+  },
+};
